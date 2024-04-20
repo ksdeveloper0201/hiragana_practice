@@ -1,115 +1,97 @@
-// In App.js in a new project
-
 import * as React from "react";
-import { Button, View, Text, TextInput } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { View, Text, Button } from "react-native";
+import { NavigationContainer, RouteProp } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-type NavigationProps = {
-    navigation: any;
-    route: any;
+type RootStackPropsList = {
+    Home: undefined;
+    InputWord: undefined;
+    Puzzle: undefined;
+    Menu: undefined;
+    // Select: undefined;
 };
 
-type DetailNavigationProps = {
-    route: any;
+type HomeScreenProps = {
     navigation: any;
 };
 
-function HomeScreen({ navigation, route }: NavigationProps) {
-    React.useEffect(() => {
-        if (route.params?.post) {
-            // Post updated, do something with `route.params.post`
-            // For example, send the post to the server
-        }
-    }, [route.params?.post]);
+type InputWordScreenProps = {
+    navigation: any;
+};
 
+type PuzzleScreenProps = {
+    navigation: any;
+};
+// type ProfileScreenProps = {
+//     navigation: any;
+//     route: RouteProp<RootStackPropsList, "Profile">;
+// };
+
+function HomeScreen({ navigation }: HomeScreenProps) {
     return (
         <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
+            <Text>ひらがな</Text>
             <Button
-                title="Create Post"
-                onPress={() => navigation.navigate("CreatePost")}
+                title="こえにだしてよむ"
+                onPress={() => navigation.navigate("InputWord")}
             />
-            <Text style={{ margin: 10 }}>Post: {route.params?.post}</Text>
+            <Button
+                title="あいうえお ぱずる"
+                onPress={() => navigation.navigate("Puzzle")}
+            />
         </View>
     );
 }
 
-type CreatePostScreenProps = {
-    navigation: any;
-    route: any;
-};
-
-function CreatePostScreen({ navigation, route }: CreatePostScreenProps) {
-    const [postText, setPostText] = React.useState("");
-
-    return (
-        <>
-            <TextInput
-                multiline
-                placeholder="Whats on your mind?"
-                style={{ height: 200, padding: 10, backgroundColor: "white" }}
-                value={postText}
-                onChangeText={setPostText}
-            />
-            <Button
-                title="Done"
-                onPress={() => {
-                    navigation.navigate({
-                        name: "Home",
-                        params: { post: postText },
-                        merge: true,
-                    });
-                }}
-            />
-        </>
-    );
-}
-
-function DetailsScreen({ route, navigation }: DetailNavigationProps) {
-    const { itemId, otherParam } = route.params;
+function InputWordScreen({ navigation }: InputWordScreenProps) {
     return (
         <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-            <Text>Details Screen</Text>
-            <Text>itemId: {JSON.stringify(itemId)}</Text>
-            <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-            <Button
-                title="Go to Details... again"
-                onPress={() =>
-                    navigation.push("Details", {
-                        itemId: Math.floor(Math.random() * 100),
-                        otherParam: "more secondary",
-                    })
-                }
-            />
-            <Button
-                title="Go to Home"
-                onPress={() => navigation.navigate("Home")}
-            />
             <Button title="Go back" onPress={() => navigation.goBack()} />
+        </View>
+    );
+}
+
+function PuzzleScreen({ navigation }: PuzzleScreenProps) {
+    return (
+        <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
             <Button
-                title="Go back to first screen in stack"
-                onPress={() => navigation.popToTop()}
+                title="あいうえおじゅん"
+                onPress={() => navigation.navigate("InputWord")}
+            />
+            <Button
+                title="らんだむ"
+                onPress={() => navigation.navigate("Puzzle")}
             />
         </View>
     );
 }
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackPropsList>();
 
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="CreatePost" component={CreatePostScreen} />
+            <Stack.Navigator>
                 <Stack.Screen
-                    name="Details"
-                    component={DetailsScreen}
-                    initialParams={{ itemId: 42 }}
+                    name="Home"
+                    component={HomeScreen}
+                    options={{ title: "welcome to hiragana" }}
+                />
+                <Stack.Screen
+                    name="InputWord"
+                    component={InputWordScreen}
+                    options={{ title: "れんしゅうすることばをいれてね" }}
+                />
+                <Stack.Screen
+                    name="Puzzle"
+                    component={PuzzleScreen}
+                    options={{ title: "こーすをせんたくしてね" }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
