@@ -10,6 +10,7 @@ type RootStackPropsList = {
     InputWord: undefined;
     Puzzle: undefined;
     Menu: undefined;
+    ShowWord: { word: string };
     // Select: undefined;
 };
 
@@ -32,6 +33,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="Puzzle"
                     component={PuzzleScreen}
+                    options={{ title: "こーすをせんたくしてね" }}
+                />
+                <Stack.Screen
+                    name="ShowWord"
+                    component={ShowWordScreen}
                     options={{ title: "こーすをせんたくしてね" }}
                 />
             </Stack.Navigator>
