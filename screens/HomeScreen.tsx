@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, TouchableOpacity } from "react-native";
 
 
 type Props = {
@@ -11,22 +11,18 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         <View
             style={styles.container}
         >
-            <Text style={{ fontSize: 32, fontWeight: "bold" }}>ひらがな</Text>
-            <View style={styles.buttonView}>
-                <Button
-                    title="こえにだしてよむ"
-                    onPress={() => navigation.navigate("InputWord")}
-                />
-            </View>
-            <View style={styles.buttonView}>
-                <Button
-                    title="あいうえお ぱずる"
-                    onPress={() => navigation.navigate("Puzzle")}
-                />
-            </View>
+            <Text style={styles.title}>ひらがな</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord")}>
+                <Text style={styles.buttonText}>こえにだしてよむ</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
+                <Text style={styles.buttonText}>あいうえお ぱずる</Text>
+            </TouchableOpacity>
+
         </View>
     );
 };
+
 
 
 const styles = StyleSheet.create({
@@ -35,11 +31,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    title: { fontSize: 36, fontWeight: "bold", marginBottom: 15 },
     buttonView: {
         marginVertical: 10
     },
     button: {
-        fontSize: 24,
+        alignItems: 'center',
+        backgroundColor: '#DDDDDD',
+        padding: 10,
+        margin: 10,
+    },
+    buttonText: {
+        fontSize: 24
     }
 });
 

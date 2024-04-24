@@ -4,13 +4,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
 import PuzzleScreen from "../screens/PuzzleScreen";
 import InputWordScreen from "../screens/InputWordScreen";
+import ShowWordScreen from "../screens/ShowWordScreen";
 
-type RootStackPropsList = {
+export type RootStackPropsList = {
     Home: undefined;
     InputWord: undefined;
     Puzzle: undefined;
     Menu: undefined;
-    ShowWord: { word: string };
+    ShowWord: { inputValue: string };
     // Select: undefined;
 };
 
@@ -38,7 +39,7 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="ShowWord"
                     component={ShowWordScreen}
-                    options={{ title: "こーすをせんたくしてね" }}
+                    options={{ title: "こえにだしてみよう" }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
