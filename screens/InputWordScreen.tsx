@@ -1,5 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { RootStackPropsList } from "../navigation/AppNavigator";
+import { RouteProp } from "@react-navigation/native";
+
 
 type Props = {
     navigation: any | undefined;
@@ -8,13 +11,18 @@ type Props = {
 const InputWordScreen: React.FC<Props> = ({ navigation }) => {
 
     const [inputValue, setInputValue] = useState("");
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener("blur", () => {
+            setInputValue("");
+        })
+        return unsubscribe;
+    }, [navigation])
+
     const handleInputChange = (text: string) => {
         setInputValue(text)
     }
 
-    // const handleSubmit = () => {
-    //     console.log("Submit value: ", inputValue)
-    // }
 
     return (
         <View
@@ -55,7 +63,7 @@ const styles = StyleSheet.create({
     buttonText: {
         fontSize: 24
     },
-    inputForm: { margin: 10, fontSize: 24, width: '40%' }
+    inputForm: { margin: 20, fontSize: 24, width: '40%', borderColor: "gray" }
 });
 
 export default InputWordScreen;

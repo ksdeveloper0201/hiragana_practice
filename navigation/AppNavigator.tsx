@@ -8,7 +8,7 @@ import ShowWordScreen from "../screens/ShowWordScreen";
 
 export type RootStackPropsList = {
     Home: undefined;
-    InputWord: undefined;
+    InputWord: { inputValue: string } | undefined;
     Puzzle: undefined;
     Menu: undefined;
     ShowWord: { inputValue: string };

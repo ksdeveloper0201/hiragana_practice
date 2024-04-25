@@ -12,9 +12,11 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
 
     const handleLetterPress = (letter: string, index: number) => {
         console.log(letter, index)
-        setSelectedLetters(prevState => ({
-            ...prevState, [`${letter}${index}`]: !prevState[`${letter}${index}`]
-        }))
+        if (!selectedLetters[`${letter}${index}`]) {
+            setSelectedLetters(prevState => ({
+                ...prevState, [`${letter}${index}`]: !prevState[`${letter}${index}`]
+            }))
+        }
     }
 
     const renderLetters = () => {
@@ -36,37 +38,35 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <View >
                 <Text style={styles.showWord}>
-
                     {renderLetters()}
                 </Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+                <TouchableOpacity style={styles.showWordButton} onPress={() => setSelectedLetters({})}>
+                    <Text style={styles.showWordButtonText}>もういちど</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("InputWord",)}>
+                    <Text style={styles.showWordButtonText}>つぎ</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
+    smallTitle: { fontSize: 16, fontWeight: "bold" },
+    showWord: {
+        fontSize: 58,
+        margin: 24
     },
-    title: { fontSize: 36, fontWeight: "bold", marginBottom: 15 },
-    buttonView: {
-        marginVertical: 10
-    },
-    subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
-    smallTitle: { fontSize: 16, fontWeight: "bold", margin: 10 },
-    button: {
+    showWordButton: {
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
-        padding: 10,
+        padding: 5,
         margin: 10,
     },
-    showWord: {
-        fontSize: 58
-    },
-    buttonText: {
-        fontSize: 24
+    showWordButtonText: {
+        fontSize: 20
     },
     inputForm: { margin: 10, fontSize: 24, width: '40%' }
 });
