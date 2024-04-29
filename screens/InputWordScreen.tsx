@@ -33,8 +33,8 @@ const InputWordScreen: React.FC<Props> = ({ navigation }) => {
             }}
         >
             <Text style={styles.subtitle}>こえにだしてよむ</Text>
-            <TextInput placeholder="ひらがなをにゅうりょくしてね" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
-            <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue }) }}>
+            <TextInput placeholder="ひらがな" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
+            <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
                 <Text style={styles.buttonText}>けってい</Text>
             </TouchableOpacity>
 
@@ -59,11 +59,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDDDDD',
         padding: 10,
         margin: 10,
+        borderRadius: 25,
     },
     buttonText: {
-        fontSize: 24
+        fontSize: 24,
+        paddingHorizontal: 5
     },
-    inputForm: { margin: 20, fontSize: 24, width: '40%', borderColor: "gray" }
+    inputForm: { margin: 44, fontSize: 24, width: '40%', borderColor: "gray" }
 });
 
 export default InputWordScreen;

@@ -5,6 +5,7 @@ import HomeScreen from "../screens/HomeScreen";
 import PuzzleScreen from "../screens/PuzzleScreen";
 import InputWordScreen from "../screens/InputWordScreen";
 import ShowWordScreen from "../screens/ShowWordScreen";
+// import RecordVoiceScreen from "../screens/RecordVoiceScreen";
 
 export type RootStackPropsList = {
     Home: undefined;
@@ -12,6 +13,7 @@ export type RootStackPropsList = {
     Puzzle: undefined;
     Menu: undefined;
     ShowWord: { inputValue: string };
+    // RecordVoice: undefined;
     // Select: undefined;
 };
 
@@ -24,23 +26,28 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
-                    options={{ title: "welcome to hiragana" }}
+                    options={{ title: "welcome to hiragana", headerShown: false }}
                 />
                 <Stack.Screen
                     name="InputWord"
                     component={InputWordScreen}
-                    options={{ title: "れんしゅうすることばをいれてね" }}
+                    options={{ title: "れんしゅうすることばをいれてね", headerShown: false }}
                 />
                 <Stack.Screen
                     name="Puzzle"
                     component={PuzzleScreen}
-                    options={{ title: "こーすをせんたくしてね" }}
+                    options={{ title: "こーすをせんたくしてね", headerShown: false }}
                 />
                 <Stack.Screen
                     name="ShowWord"
                     component={ShowWordScreen}
-                    options={{ title: "こえにだしてみよう" }}
+                    options={{ title: "こえにだしてみよう", headerShown: false }}
                 />
+                {/* <Stack.Screen
+                    name="RecordVoice"
+                    component={RecordVoiceScreen}
+                    options={{ title: "こえにだしてみよう" }}
+                /> */}
             </Stack.Navigator>
         </NavigationContainer>
     );

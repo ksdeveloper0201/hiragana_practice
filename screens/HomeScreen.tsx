@@ -19,6 +19,7 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.buttonText}>あいうえお ぱずる</Text>
             </TouchableOpacity>
 
+
         </View>
     );
 };
@@ -38,8 +39,10 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
-        padding: 10,
         margin: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+        borderRadius: 25
     },
     buttonText: {
         fontSize: 24

@@ -1,14 +1,21 @@
-import { RouteProp } from "@react-navigation/native";
-import { useState } from "react";
-import { Button, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
-import { RootStackPropsList } from "../navigation/AppNavigator";
+import { useState } from "react"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 
-type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
+const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
+const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
+const HANDAKUTEN = "ぱぴぷぺぽ"
+const JAPANESE = HIRAGANA + DAKUTEN + HANDAKUTEN
+const randomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
 
-interface ShowWordScreenProps { route: ShowWordScreenRouteProp, navigation: any }
+type RandomPuzzleScreenProps = {
+    navigation: any
+}
 
-const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) => {
+const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) => {
+
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
+    const [showingLetters, setShowingLetters] = useState()
+
 
     const handleLetterPress = (letter: string, index: number) => {
         if (selectedLetters[`${letter}${index}`]) {
@@ -19,10 +26,11 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
                 ...prevState, [`${letter}${index}`]: !prevState[`${letter}${index}`]
             }))
         }
+
     }
 
     const renderLetters = () => {
-        return route.params.inputValue.split('').map((letter, index) => (
+        return randomHiraganas.split('').map((letter, index) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
                 <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity>
@@ -38,6 +46,8 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
             }}
         >
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
+            <Text style={styles.smallTitle}>もじをさがそう</Text>
+            <Text style={styles.smallTitle}>{showingLetters}</Text>
             <View >
                 <Text style={styles.showWord}>
                     {renderLetters()}
@@ -51,9 +61,8 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
                     <Text style={styles.showWordButtonText}>つぎ</Text>
                 </TouchableOpacity>
             </View>
-        </View>
-    );
-};
+        </View>);
+}
 
 const styles = StyleSheet.create({
     smallTitle: { fontSize: 16, fontWeight: "bold" },
@@ -75,4 +84,4 @@ const styles = StyleSheet.create({
     inputForm: { margin: 10, fontSize: 24, width: '40%' }
 });
 
-export default ShowWordScreen
+export default RandomPuzzleScreen;

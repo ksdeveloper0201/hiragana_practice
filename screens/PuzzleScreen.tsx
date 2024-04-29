@@ -9,9 +9,9 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
         <View
             style={styles.container}
         >
-            <Text style={styles.title}>あいうえおぱずる</Text>
+            <Text style={styles.title}>あいうえお ぱずる</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord")}>
-                <Text style={styles.buttonText}>あいうえおじゅん</Text>
+                <Text style={styles.buttonText}>あいうえお じゅん</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
                 <Text style={styles.buttonText}>らんだむ</Text>
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDDDDD',
         padding: 10,
         margin: 10,
+        borderRadius: 25,
     },
     buttonText: {
         fontSize: 24
