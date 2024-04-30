@@ -13,7 +13,7 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord")}>
                 <Text style={styles.buttonText}>あいうえお じゅん</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>
                 <Text style={styles.buttonText}>らんだむ</Text>
             </TouchableOpacity>
 

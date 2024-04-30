@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 
 const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
@@ -12,25 +12,61 @@ type RandomPuzzleScreenProps = {
 }
 
 const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) => {
-
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
-    const [showingLetters, setShowingLetters] = useState()
+    const [forSelectLetters, setForSelectedLetters] = useState<string>("")
+
+    const [srcLetters, setSrcLetters] = useState<string>("")
+    const [showingLetters, setShowingLetters] = useState<string>("")
+    const [showingIndex, setShowingIndex] = useState<number>(0)
+
+
+    useEffect(() => {
+        const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
+        const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
+        const HANDAKUTEN = "ぱぴぷぺぽ"
+        const JAPANESE = HIRAGANA + DAKUTEN + HANDAKUTEN
+        const randomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
+
+        setSrcLetters(randomHiraganas)
+        setForSelectedLetters(randomHiraganas)
+    }, [])
+
+    useEffect(() => {
+        if (srcLetters) {
+            const newShowingLetter = srcLetters[Math.floor(Math.random() * srcLetters.length)];
+            setShowingLetters(newShowingLetter);
+            console.log("New showingLetters:", newShowingLetter);
+        }
+    }, [srcLetters]);
+
+    const shuffleHiraganas = randomHiraganas.split('').sort(() => Math.random() - 0.5).join('');
+
+
+
+    // const checkLetter = (letter, index) => {
+    //     if (index = )
+    // }
 
 
     const handleLetterPress = (letter: string, index: number) => {
-        if (selectedLetters[`${letter}${index}`]) {
-            return
-        }
-        if (index == 0 || Object.keys(selectedLetters).includes(`${route.params.inputValue[index - 1]}${index - 1}`)) {
+        console.log('handleletter')
+        if (letter == showingLetters) {
+            console.log("onaji")
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: !prevState[`${letter}${index}`]
             }))
-        }
 
+            const updatedSrcLetters = srcLetters.replace(showingLetters, "")
+            setSrcLetters(updatedSrcLetters)
+            console.log("updatedSrc", srcLetters)
+            setShowingLetters(() => srcLetters[Math.floor(Math.random() * srcLetters.length)])
+            console.log("showingLetters", showingLetters)
+        }
+        console.log("updatedSrc", srcLetters)
     }
 
     const renderLetters = () => {
-        return randomHiraganas.split('').map((letter, index) => (
+        return forSelectLetters.split('').map((letter, index) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
                 <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity>
@@ -45,7 +81,6 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                 justifyContent: "center",
             }}
         >
-            <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <Text style={styles.smallTitle}>もじをさがそう</Text>
             <Text style={styles.smallTitle}>{showingLetters}</Text>
             <View >
