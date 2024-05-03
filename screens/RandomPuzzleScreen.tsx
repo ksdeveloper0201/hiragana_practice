@@ -17,7 +17,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
 
     const [srcLetters, setSrcLetters] = useState<string>("")
     const [showingLetters, setShowingLetters] = useState<string>("")
-    const [showingIndex, setShowingIndex] = useState<number>(0)
+    const [gameOver, setGameOver] = useState<boolean>()
 
 
     useEffect(() => {
@@ -53,14 +53,23 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
         if (letter == showingLetters) {
             console.log("onaji")
             setSelectedLetters(prevState => ({
-                ...prevState, [`${letter}${index}`]: !prevState[`${letter}${index}`]
+                ...prevState, [`${letter}${index}`]: true
             }))
 
             const updatedSrcLetters = srcLetters.replace(showingLetters, "")
             setSrcLetters(updatedSrcLetters)
             console.log("updatedSrc", srcLetters)
-            setShowingLetters(() => srcLetters[Math.floor(Math.random() * srcLetters.length)])
-            console.log("showingLetters", showingLetters)
+
+            if (updatedSrcLetters.length === 0) {
+                console.log("All letters selected!");
+                setGameOver(true)
+                setShowingLetters("よくできました")
+            } else {
+                const randomIndex = Math.floor(Math.random() * srcLetters.length)
+                const newShowingLetter = updatedSrcLetters[randomIndex]
+                setShowingLetters(newShowingLetter)
+                console.log("showingLetters", newShowingLetter)
+            }
         }
         console.log("updatedSrc", srcLetters)
     }
@@ -68,7 +77,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     const renderLetters = () => {
         return forSelectLetters.split('').map((letter, index) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
-                <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+                <Text style={gameOver ? styles.smallTitle : { fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity>
         ))
     }
@@ -82,24 +91,25 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
             }}
         >
             <Text style={styles.smallTitle}>もじをさがそう</Text>
-            <Text style={styles.smallTitle}>{showingLetters}</Text>
+            <Text style={gameOver ? styles.gameOver : styles.showWord}>{showingLetters}</Text>
             <View >
                 <Text style={styles.showWord}>
                     {renderLetters()}
                 </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => setSelectedLetters({})}>
+                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("RandomPuzzle")}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("InputWord",)}>
-                    <Text style={styles.showWordButtonText}>つぎ</Text>
+                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("Home")}>
+                    <Text style={styles.showWordButtonText}>ほーむ</Text>
                 </TouchableOpacity>
             </View>
         </View>);
 }
 
 const styles = StyleSheet.create({
+    gameOver: { fontSize: 48, fontWeight: "bold", color: "blue" },
     smallTitle: { fontSize: 16, fontWeight: "bold" },
     showWord: {
         fontSize: 58,
