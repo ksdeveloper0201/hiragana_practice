@@ -82,6 +82,15 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
         ))
     }
 
+    const resetGame = () => {
+        const newRandomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
+        setSrcLetters(newRandomHiraganas)
+        setForSelectedLetters(newRandomHiraganas)
+        setSelectedLetters({})
+        setShowingLetters(newRandomHiraganas[Math.floor(Math.random() * newRandomHiraganas.length)]);
+        setGameOver(false);
+    }
+
     return (
         <View
             style={{
@@ -98,7 +107,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                 </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("RandomPuzzle")}>
+                <TouchableOpacity style={styles.showWordButton} onPress={resetGame}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("Home")}>
