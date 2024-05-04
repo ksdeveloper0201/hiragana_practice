@@ -1,4 +1,4 @@
-import { Button, View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 
 type Props = {
     navigation: any;
