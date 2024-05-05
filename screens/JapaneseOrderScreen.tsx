@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 
 type JapaneseOrderScreenProps = {
@@ -31,31 +31,52 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
         if (lineIndex > orderedJapanese.length) return
-        if (isOverLine) {
-            setLineIndex((prevNum) => prevNum + 1)
-            setIsOverLine(false)
-        }
+        if (!showingWords) setShowingWords(orderedJapanese[lineIndex])
+
+        console.log(lineIndex)
+        console.log(selectedLetters)
+        console.log(orderedJapanese[lineIndex])
         return orderedJapanese[lineIndex].split("").map((letter: string, index: number) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
                 <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity >
-
         ))
-
     }
 
 
     const handleLetterPress = (letter: string, index: number) => {
-        if (index == 0) {
+        if (index == 0 || selectedLetters[`${showingWords[index - 1]}${index - 1}`] === true) {
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: true
             }))
         }
-        if (showingWords.length === Object.keys(selectedLetters).length) {
+        if (index !== 0 && showingWords.length === index + 1) {
             setIsOverLine(true)
         }
-
     }
+
+    const initNextLine = () => {
+        if (isOverLine) {
+            setLineIndex((prevNum) => prevNum + 1)
+            setIsOverLine(false)
+            setSelectedLetters({})
+            setShowingWords(orderedJapanese[lineIndex])
+        }
+    }
+
+
+    const renderNextLineButton = () => {
+        if (isOverLine) {
+            return (
+                <TouchableOpacity style={styles.showWordButton} onPress={initNextLine}>
+                    <Text>つぎのぎょう</Text>
+                </TouchableOpacity>
+            )
+        } else {
+            return null;
+        }
+    }
+
 
     return (
         <View
@@ -71,6 +92,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
                     {renderOrderJapanese()}
                 </Text>
             </View>
+            <View>{renderNextLineButton()}</View>
             <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity style={styles.showWordButton}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
