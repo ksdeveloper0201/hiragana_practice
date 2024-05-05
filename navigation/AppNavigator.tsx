@@ -6,6 +6,7 @@ import PuzzleScreen from "../screens/PuzzleScreen";
 import InputWordScreen from "../screens/InputWordScreen";
 import ShowWordScreen from "../screens/ShowWordScreen";
 import RandomPuzzleScreen from "../screens/RandomPuzzleScreen";
+import JapaneseOrderScreen from "../screens/JapaneseOrderScreen";
 // import RecordVoiceScreen from "../screens/RecordVoiceScreen";
 
 export type RootStackPropsList = {
@@ -15,6 +16,7 @@ export type RootStackPropsList = {
     Menu: undefined;
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
+    JapaneseOrder: undefined;
     // Select: undefined;
 };
 
@@ -47,6 +49,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="RandomPuzzle"
                     component={RandomPuzzleScreen}
+                    options={{ title: "もじをさがそう", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="JapaneseOrder"
+                    component={JapaneseOrderScreen}
                     options={{ title: "もじをさがそう", headerShown: false }}
                 />
             </Stack.Navigator>

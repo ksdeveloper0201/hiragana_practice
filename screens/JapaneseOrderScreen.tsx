@@ -20,23 +20,39 @@ const orderedJapanese = [
 
 const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation }) => {
 
+    //選択中の文字（赤字にする文字）
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
+    //一行が終わっているかの判定
+    const [isOverLine, setIsOverLine] = useState<boolean>(false)
+    //画面に出力中の複数文字
+    const [showingWords, setShowingWords] = useState<string>("")
+    const [lineIndex, setLineIndex] = useState<number>(0)
 
     const renderOrderJapanese = () => {
-        return orderedJapanese.map((line: any) => {
-            line.split("").map((letter: string, index: number) => {
-                <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
-                    <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
-                </TouchableOpacity >
-            })
-        })
+        // orderedJapanese.map((line: any) => {
+        if (lineIndex > orderedJapanese.length) return
+        if (isOverLine) {
+            setLineIndex((prevNum) => prevNum + 1)
+            setIsOverLine(false)
+        }
+        return orderedJapanese[lineIndex].split("").map((letter: string, index: number) => (
+            <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
+                <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+            </TouchableOpacity >
+
+        ))
+
     }
+
 
     const handleLetterPress = (letter: string, index: number) => {
         if (index == 0) {
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: true
             }))
+        }
+        if (showingWords.length === Object.keys(selectedLetters).length) {
+            setIsOverLine(true)
         }
 
     }
@@ -56,7 +72,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
                 </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={null}>
+                <TouchableOpacity style={styles.showWordButton}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("InputWord",)}>
