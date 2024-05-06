@@ -27,6 +27,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     //画面に出力中の複数文字
     const [showingWords, setShowingWords] = useState<string>("")
     const [lineIndex, setLineIndex] = useState<number>(0)
+    const [letterIndex, setLetterIndex] = useState<number>(0)
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
@@ -45,22 +46,26 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
 
 
     const handleLetterPress = (letter: string, index: number) => {
+        // setLetterIndex(index)
         if (index == 0 || selectedLetters[`${showingWords[index - 1]}${index - 1}`] === true) {
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: true
             }))
-        }
-        if (index !== 0 && showingWords.length === index + 1) {
-            setIsOverLine(true)
+            if (index !== 0 && showingWords.length === index + 1) {
+                setIsOverLine(true)
+            }
         }
     }
 
     const initNextLine = () => {
-        if (isOverLine) {
-            setLineIndex((prevNum) => prevNum + 1)
+        if (isOverLine && selectedLetters[`${showingWords[showingWords.length - 1]}${showingWords.length - 1}`] === true) {
+            setLineIndex((prevNum) => {
+                const newIndex = prevNum + 1
+                setShowingWords(orderedJapanese[newIndex])
+                return newIndex
+            })
             setIsOverLine(false)
             setSelectedLetters({})
-            setShowingWords(orderedJapanese[lineIndex])
         }
     }
 
