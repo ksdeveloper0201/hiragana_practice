@@ -31,7 +31,11 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
-        if (lineIndex > orderedJapanese.length) return
+        if (lineIndex === orderedJapanese.length) {
+            console.log("its over")
+            return (<Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: 'red' }}>よくできました</Text>
+            )
+        }
         if (!showingWords) setShowingWords(orderedJapanese[lineIndex])
 
         console.log(lineIndex)
@@ -74,7 +78,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
         if (isOverLine) {
             return (
                 <TouchableOpacity style={styles.showWordButton} onPress={initNextLine}>
-                    <Text>つぎのぎょう</Text>
+                    <Text style={styles.showWordButtonText}>つぎのぎょう</Text>
                 </TouchableOpacity>
             )
         } else {
