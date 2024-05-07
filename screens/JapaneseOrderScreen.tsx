@@ -27,7 +27,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     //画面に出力中の複数文字
     const [showingWords, setShowingWords] = useState<string>("")
     const [lineIndex, setLineIndex] = useState<number>(0)
-    const [letterIndex, setLetterIndex] = useState<number>(0)
+    // const [letterIndex, setLetterIndex] = useState<number>(0)
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
@@ -86,6 +86,20 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
         }
     }
 
+    const initStates = () => {
+        setSelectedLetters({})
+        setIsOverLine(false)
+        setShowingWords("")
+        setLineIndex(0)
+
+        // const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
+        // //一行が終わっているかの判定
+        // const [isOverLine, setIsOverLine] = useState<boolean>(false)
+        //画面に出力中の複数文字
+        // const [showingWords, setShowingWords] = useState<string>("")
+        // const [lineIndex, setLineIndex] = useState<number>(0)
+    }
+
 
     return (
         <View
@@ -103,11 +117,11 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
             </View>
             <View>{renderNextLineButton()}</View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton}>
+                <TouchableOpacity style={styles.showWordButton} onPress={initStates}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("InputWord",)}>
-                    <Text style={styles.showWordButtonText}>つぎ</Text>
+                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("Home",)}>
+                    <Text style={styles.showWordButtonText}>ほーむ</Text>
                 </TouchableOpacity>
             </View>
         </View>
