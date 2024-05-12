@@ -25,23 +25,23 @@ const InputWordScreen: React.FC<Props> = ({ navigation }) => {
         setInputValue(text)
     }
 
-
     return (
-        <>
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                <Text style={styles.subtitle}>こえにだしてよむ</Text>
-                <TextInput placeholder="ひらがな" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
-                <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
-                    <Text style={styles.buttonText}>けってい</Text>
-                </TouchableOpacity>
-            </View>
-        </>
+        <View style={styles.container}>
+
+            <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate("Home")}>
+                <MaterialCommunityIcons name="menu" size={36} color="black" />
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.homeIcon} onPress={() => navigation.navigate("Home")}>
+                <MaterialCommunityIcons name="home-circle" size={36} color="black" />
+            </TouchableOpacity>
+
+            <Text style={styles.subtitle}>こえにだしてよむ</Text>
+            <TextInput placeholder="ひらがな" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
+            <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
+                <Text style={styles.buttonText}>けってい</Text>
+            </TouchableOpacity>
+        </View>
     );
 };
 
@@ -50,6 +50,16 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+    },
+    homeIcon: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+    },
+    menuIcon: {
+        position: 'absolute',
+        top: 10,
+        left: 10,
     },
     title: { fontSize: 36, fontWeight: "bold", marginBottom: 15 },
     buttonView: {
