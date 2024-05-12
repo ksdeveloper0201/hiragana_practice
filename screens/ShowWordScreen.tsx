@@ -2,6 +2,7 @@ import { RouteProp } from "@react-navigation/native";
 import { useState } from "react";
 import { Button, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
+import HeaderIcons from "../components/HeaderIcons";
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
 
@@ -30,13 +31,8 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
     }
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
+        <View style={styles.container}>
+            <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <View >
                 <Text style={styles.showWord}>
@@ -56,6 +52,11 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     smallTitle: { fontSize: 16, fontWeight: "bold" },
     showWord: {
         fontSize: 58,

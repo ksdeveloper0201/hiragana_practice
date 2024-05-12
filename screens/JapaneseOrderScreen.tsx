@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import HeaderIcons from "../components/HeaderIcons";
 
 type JapaneseOrderScreenProps = {
     navigation: any
@@ -102,13 +103,8 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
 
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
+        <View style={styles.container}>
+            <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <View >
                 <Text style={styles.showWord}>
@@ -120,15 +116,17 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
                 <TouchableOpacity style={styles.showWordButton} onPress={initStates}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("Home",)}>
-                    <Text style={styles.showWordButtonText}>ほーむ</Text>
-                </TouchableOpacity>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     smallTitle: { fontSize: 16, fontWeight: "bold" },
     showWord: {
         fontSize: 58,

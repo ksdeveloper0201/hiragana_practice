@@ -1,4 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import HeaderIcons from "../components/HeaderIcons";
 
 type Props = {
     navigation: any;
@@ -6,9 +7,8 @@ type Props = {
 
 const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
     return (
-        <View
-            style={styles.container}
-        >
+        <View style={styles.container}>
+            <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>あいうえお ぱずる</Text>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder")}>
                 <Text style={styles.buttonText}>あいうえお じゅん</Text>

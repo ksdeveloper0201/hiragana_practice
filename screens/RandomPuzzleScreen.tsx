@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import HeaderIcons from "../components/HeaderIcons"
 
 const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
 const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
@@ -92,13 +93,8 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     }
 
     return (
-        <View
-            style={{
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-            }}
-        >
+        <View style={styles.container}>
+            <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>もじをさがそう</Text>
             <Text style={gameOver ? styles.gameOver : styles.showWord}>{showingLetters}</Text>
             <View >
@@ -110,14 +106,16 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                 <TouchableOpacity style={styles.showWordButton} onPress={resetGame}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("Home")}>
-                    <Text style={styles.showWordButtonText}>ほーむ</Text>
-                </TouchableOpacity>
             </View>
         </View>);
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
     gameOver: { fontSize: 48, fontWeight: "bold", color: "blue" },
     smallTitle: { fontSize: 16, fontWeight: "bold" },
     showWord: {

@@ -1,6 +1,7 @@
 import * as React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import HeaderIcons from "../components/HeaderIcons";
 
 type Props = {
     navigation: any;
@@ -9,15 +10,7 @@ type Props = {
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/* メニューアイコン */}
-            <TouchableOpacity style={styles.menuIcon} onPress={() => console.log("Menu pressed")}>
-                <MaterialCommunityIcons name="menu" size={32} color="black" />
-            </TouchableOpacity>
-
-            {/* ホームアイコン */}
-            <TouchableOpacity style={styles.homeIcon} onPress={() => navigation.navigate("Home")}>
-                <MaterialCommunityIcons name="home-circle" size={36} color="black" />
-            </TouchableOpacity>
+            <HeaderIcons navigation={navigation} />
 
             <Text style={styles.title}>ひらがな</Text>
 
@@ -38,16 +31,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    menuIcon: {
-        position: "absolute",
-        top: 10,
-        left: 10,
-    },
-    homeIcon: {
-        position: "absolute",
-        top: 10,
-        right: 10,
-    },
+
     title: {
         fontSize: 36,
         fontWeight: "bold",
