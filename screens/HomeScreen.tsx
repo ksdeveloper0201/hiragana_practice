@@ -2,6 +2,7 @@ import * as React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HeaderIcons from "../components/HeaderIcons";
+import { styles } from "../styles/CommonStyles";
 
 type Props = {
     navigation: any;
@@ -25,29 +26,29 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         alignItems: "center",
+//         justifyContent: "center",
+//     },
 
-    title: {
-        fontSize: 36,
-        fontWeight: "bold",
-        marginBottom: 15,
-    },
-    button: {
-        alignItems: "center",
-        backgroundColor: "#DDDDDD",
-        margin: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
-        borderRadius: 25,
-    },
-    buttonText: {
-        fontSize: 24,
-    },
-});
+//     title: {
+//         fontSize: 36,
+//         fontWeight: "bold",
+//         marginBottom: 15,
+//     },
+//     button: {
+//         alignItems: "center",
+//         backgroundColor: "#DDDDDD",
+//         margin: 10,
+//         paddingHorizontal: 15,
+//         paddingVertical: 5,
+//         borderRadius: 25,
+//     },
+//     buttonText: {
+//         fontSize: 24,
+//     },
+// });
 
 export default HomeScreen;

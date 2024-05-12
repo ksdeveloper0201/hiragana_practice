@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
+import { styles } from "../styles/CommonStyles";
 
 type JapaneseOrderScreenProps = {
     navigation: any
@@ -121,29 +122,29 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    smallTitle: { fontSize: 16, fontWeight: "bold" },
-    showWord: {
-        fontSize: 58,
-        margin: 24
-    },
-    showWordButton: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 5,
-        margin: 10,
-        borderRadius: 25,
-    },
-    showWordButtonText: {
-        fontSize: 20,
-        paddingHorizontal: 5
-    },
-    inputForm: { margin: 10, fontSize: 24, width: '40%' }
-});
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         alignItems: "center",
+//         justifyContent: "center",
+//     },
+//     smallTitle: { fontSize: 16, fontWeight: "bold" },
+//     showWord: {
+//         fontSize: 58,
+//         margin: 24
+//     },
+//     showWordButton: {
+//         alignItems: 'center',
+//         backgroundColor: '#DDDDDD',
+//         padding: 5,
+//         margin: 10,
+//         borderRadius: 25,
+//     },
+//     showWordButtonText: {
+//         fontSize: 20,
+//         paddingHorizontal: 5
+//     },
+//     inputForm: { margin: 10, fontSize: 24, width: '40%' }
+// });
 
 export default JapaneseOrderScreen;
