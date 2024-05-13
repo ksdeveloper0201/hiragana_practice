@@ -79,8 +79,8 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     const renderNextLineButton = () => {
         if (isOverLine) {
             return (
-                <TouchableOpacity style={styles.showWordButton} onPress={initNextLine}>
-                    <Text style={styles.showWordButtonText}>つぎのぎょう</Text>
+                <TouchableOpacity style={styles.button} onPress={initNextLine}>
+                    <Text style={styles.buttonText}>つぎのぎょう</Text>
                 </TouchableOpacity>
             )
         } else {
@@ -114,7 +114,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
             </View>
             <View>{renderNextLineButton()}</View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={initStates}>
+                <TouchableOpacity style={styles.button} onPress={initStates}>
                     <Text style={styles.showWordButtonText}>もういちど</Text>
                 </TouchableOpacity>
             </View>
@@ -122,29 +122,5 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
     );
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         alignItems: "center",
-//         justifyContent: "center",
-//     },
-//     smallTitle: { fontSize: 16, fontWeight: "bold" },
-//     showWord: {
-//         fontSize: 58,
-//         margin: 24
-//     },
-//     showWordButton: {
-//         alignItems: 'center',
-//         backgroundColor: '#DDDDDD',
-//         padding: 5,
-//         margin: 10,
-//         borderRadius: 25,
-//     },
-//     showWordButtonText: {
-//         fontSize: 20,
-//         paddingHorizontal: 5
-//     },
-//     inputForm: { margin: 10, fontSize: 24, width: '40%' }
-// });
 
 export default JapaneseOrderScreen;

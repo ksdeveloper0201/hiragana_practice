@@ -7,10 +7,17 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
 
+    // title
     title: {
         fontSize: 36,
         fontWeight: "bold",
         marginBottom: 15,
+    },
+    subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
+    smallTitle: { fontSize: 16, fontWeight: "bold" },
+    // button
+    buttonView: {
+        marginVertical: 10,
     },
     button: {
         alignItems: "center",
@@ -31,37 +38,19 @@ export const styles = StyleSheet.create({
         borderColor: "gray",
         borderStyle: "solid",
     },
-
     // inputword
-
-    buttonView: {
-        marginVertical: 10,
-    },
-    subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
-    // button: {
-    //     alignItems: "center",
-    //     backgroundColor: "#DDDDDD",
-    //     padding: 10,
-    //     margin: 10,
-    //     borderRadius: 25,
-    // },
-    // javpanese order
-
-    smallTitle: { fontSize: 16, fontWeight: "bold" },
     showWord: {
         fontSize: 58,
         margin: 24,
-    },
-    showWordButton: {
-        alignItems: "center",
-        backgroundColor: "#DDDDDD",
-        padding: 5,
-        margin: 10,
-        borderRadius: 25,
     },
     showWordButtonText: {
         fontSize: 20,
         paddingHorizontal: 5,
     },
-    // inputForm: { margin: 10, fontSize: 24, width: "40%" },
+    gameOver: {
+        fontSize: 48,
+        fontWeight: "bold",
+        color: "blue",
+        marginVertical: 20,
+    },
 });

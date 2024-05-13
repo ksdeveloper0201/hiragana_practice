@@ -1,5 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
+import { styles } from "../styles/CommonStyles";
 
 type Props = {
     navigation: any;
@@ -22,26 +23,5 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: { fontSize: 32, fontWeight: "bold", marginBottom: 15 },
-    buttonView: {
-        marginVertical: 10
-    },
-    button: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 10,
-        margin: 10,
-        borderRadius: 25,
-    },
-    buttonText: {
-        fontSize: 24
-    }
-});
 
 export default PuzzleScreen;

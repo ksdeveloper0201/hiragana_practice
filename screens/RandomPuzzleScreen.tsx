@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import HeaderIcons from "../components/HeaderIcons"
+import { styles } from "../styles/CommonStyles";
 
 const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
 const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
@@ -42,11 +43,6 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
 
     const shuffleHiraganas = randomHiraganas.split('').sort(() => Math.random() - 0.5).join('');
 
-
-
-    // const checkLetter = (letter, index) => {
-    //     if (index = )
-    // }
 
 
     const handleLetterPress = (letter: string, index: number) => {
@@ -97,43 +93,19 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>もじをさがそう</Text>
             <Text style={gameOver ? styles.gameOver : styles.showWord}>{showingLetters}</Text>
-            <View >
-                <Text style={styles.showWord}>
-                    {renderLetters()}
-                </Text>
-            </View>
+            {!gameOver &&
+                (<View>
+                    <Text style={styles.showWord}>
+                        {renderLetters()}
+                    </Text>
+                </View>
+                )}
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={resetGame}>
-                    <Text style={styles.showWordButtonText}>もういちど</Text>
+                <TouchableOpacity style={styles.button} onPress={resetGame}>
+                    <Text style={styles.buttonText}>もういちど</Text>
                 </TouchableOpacity>
             </View>
         </View>);
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    gameOver: { fontSize: 48, fontWeight: "bold", color: "blue" },
-    smallTitle: { fontSize: 16, fontWeight: "bold" },
-    showWord: {
-        fontSize: 58,
-        margin: 24
-    },
-    showWordButton: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 5,
-        margin: 10,
-        borderRadius: 25,
-    },
-    showWordButtonText: {
-        fontSize: 20,
-        paddingHorizontal: 5
-    },
-    inputForm: { margin: 10, fontSize: 24, width: '40%' }
-});
 
 export default RandomPuzzleScreen;

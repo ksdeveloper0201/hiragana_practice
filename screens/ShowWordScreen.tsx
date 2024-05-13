@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import HeaderIcons from "../components/HeaderIcons";
+import { styles } from "../styles/CommonStyles";
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
 
@@ -40,40 +41,16 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
                 </Text>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => setSelectedLetters({})}>
-                    <Text style={styles.showWordButtonText}>もういちど</Text>
+                <TouchableOpacity style={styles.button} onPress={() => setSelectedLetters({})}>
+                    <Text style={styles.buttonText}>もういちど</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.showWordButton} onPress={() => navigation.navigate("InputWord",)}>
-                    <Text style={styles.showWordButtonText}>つぎ</Text>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord",)}>
+                    <Text style={styles.buttonText}>つぎ</Text>
                 </TouchableOpacity>
             </View>
         </View>
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    smallTitle: { fontSize: 16, fontWeight: "bold" },
-    showWord: {
-        fontSize: 58,
-        margin: 24
-    },
-    showWordButton: {
-        alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 5,
-        margin: 10,
-        borderRadius: 25,
-    },
-    showWordButtonText: {
-        fontSize: 20,
-        paddingHorizontal: 5
-    },
-    inputForm: { margin: 10, fontSize: 24, width: '40%' }
-});
 
 export default ShowWordScreen
