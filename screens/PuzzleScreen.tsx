@@ -10,9 +10,12 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
-            <Text style={styles.title}>あいうえお ぱずる</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder")}>
-                <Text style={styles.buttonText}>あいうえお じゅん</Text>
+            <Text style={styles.title}>あいうえお パズル</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { isKana: false })}>
+                <Text style={styles.buttonText}>あいうえお（ひらがな）</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { isKana: true })}>
+                <Text style={styles.buttonText}>あいうえお（カタカナ）</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>
                 <Text style={styles.buttonText}>らんだむ</Text>

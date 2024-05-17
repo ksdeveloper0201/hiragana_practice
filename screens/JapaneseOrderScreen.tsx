@@ -2,25 +2,18 @@ import { useEffect, useState } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackPropsList } from "../navigation/AppNavigator";
+import { HIRAGANA_LIST, KANA_LIST } from "../enums/words-enum";
 
-type JapaneseOrderScreenProps = {
+type JapaneseOrderScreenRouteProp = RouteProp<RootStackPropsList, 'JapaneseOrder'>
+interface JapaneseOrderScreenProps {
+    route: JapaneseOrderScreenRouteProp
     navigation: any
 }
 
-const orderedJapanese = [
-    "あいうえお",
-    "かきくけこ",
-    "さしすせそ",
-    "たちつてと",
-    "なにぬねの",
-    "はひふへほ",
-    "まみむめも",
-    "やゆよ",
-    "らりるれろ",
-    "わをん",
-]
-
-const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation }) => {
+const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, route }) => {
+    const wordList = route.params.isKana ? KANA_LIST : HIRAGANA_LIST;
 
     //選択中の文字（赤字にする文字）
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
@@ -33,17 +26,17 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
-        if (lineIndex === orderedJapanese.length) {
+        if (lineIndex === wordList.length) {
             console.log("its over")
             return (<Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: 'red' }}>よくできました</Text>
             )
         }
-        if (!showingWords) setShowingWords(orderedJapanese[lineIndex])
+        if (!showingWords) setShowingWords(wordList[lineIndex])
 
         console.log(lineIndex)
         console.log(selectedLetters)
-        console.log(orderedJapanese[lineIndex])
-        return orderedJapanese[lineIndex].split("").map((letter: string, index: number) => (
+        console.log(wordList[lineIndex])
+        return wordList[lineIndex].split("").map((letter: string, index: number) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
                 <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity >
@@ -67,7 +60,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
         if (isOverLine && selectedLetters[`${showingWords[showingWords.length - 1]}${showingWords.length - 1}`] === true) {
             setLineIndex((prevNum) => {
                 const newIndex = prevNum + 1
-                setShowingWords(orderedJapanese[newIndex])
+                setShowingWords(wordList[newIndex])
                 return newIndex
             })
             setIsOverLine(false)
@@ -115,7 +108,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation })
             <View>{renderNextLineButton()}</View>
             <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity style={styles.button} onPress={initStates}>
-                    <Text style={styles.showWordButtonText}>もういちど</Text>
+                    <Text style={styles.buttonText}>もういちど</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
     },
     subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
-    smallTitle: { fontSize: 16, fontWeight: "bold" },
+    smallTitle: { fontSize: 20, fontWeight: "bold" },
     // button
     buttonView: {
         marginVertical: 10,

@@ -6,7 +6,6 @@ import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
-
 interface ShowWordScreenProps { route: ShowWordScreenRouteProp, navigation: any }
 
 const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) => {

@@ -7,6 +7,7 @@ import InputWordScreen from "../screens/InputWordScreen";
 import ShowWordScreen from "../screens/ShowWordScreen";
 import RandomPuzzleScreen from "../screens/RandomPuzzleScreen";
 import JapaneseOrderScreen from "../screens/JapaneseOrderScreen";
+import MenuScreen from "../screens/MenuScreen";
 // import RecordVoiceScreen from "../screens/RecordVoiceScreen";
 
 export type RootStackPropsList = {
@@ -16,7 +17,7 @@ export type RootStackPropsList = {
     Menu: undefined;
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
-    JapaneseOrder: undefined;
+    JapaneseOrder: { isKana: boolean };
     // Select: undefined;
 };
 
@@ -29,6 +30,11 @@ const AppNavigator = () => {
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
+                    options={{ title: "welcome to hiragana", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Menu"
+                    component={MenuScreen}
                     options={{ title: "welcome to hiragana", headerShown: false }}
                 />
                 <Stack.Screen

@@ -2,16 +2,15 @@ import { useEffect, useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 import HeaderIcons from "../components/HeaderIcons"
 import { styles } from "../styles/CommonStyles";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackPropsList } from "../navigation/AppNavigator";
+import { HIRAGANA_JAPANESE } from "../enums/words-enum";
 
-const HIRAGANA = "あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん"
-const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
-const HANDAKUTEN = "ぱぴぷぺぽ"
-const JAPANESE = HIRAGANA + DAKUTEN + HANDAKUTEN
-const randomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
 
-type RandomPuzzleScreenProps = {
-    navigation: any
-}
+
+const randomHiraganas = Array.from(Array(10)).map(() => HIRAGANA_JAPANESE[Math.floor(Math.random() * HIRAGANA_JAPANESE.length)]).join('')
+
+interface RandomPuzzleScreenProps { navigation: any }
 
 const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) => {
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
@@ -80,7 +79,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     }
 
     const resetGame = () => {
-        const newRandomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
+        const newRandomHiraganas = Array.from(Array(10)).map(() => HIRAGANA_JAPANESE[Math.floor(Math.random() * HIRAGANA_JAPANESE.length)]).join('')
         setSrcLetters(newRandomHiraganas)
         setForSelectedLetters(newRandomHiraganas)
         setSelectedLetters({})
