@@ -26,7 +26,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
         const DAKUTEN = "ざじずぜぞだぢづでどはびぶべぼ"
         const HANDAKUTEN = "ぱぴぷぺぽ"
         const JAPANESE = HIRAGANA + DAKUTEN + HANDAKUTEN
-        const randomHiraganas = Array.from(Array(10)).map(() => JAPANESE[Math.floor(Math.random() * JAPANESE.length)]).join('')
+        const randomHiraganas = generateUniqueRandomHiraganas(10)
 
         setSrcLetters(randomHiraganas)
         setForSelectedLetters(randomHiraganas)
@@ -41,8 +41,6 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     }, [srcLetters]);
 
     const shuffleHiraganas = randomHiraganas.split('').sort(() => Math.random() - 0.5).join('');
-
-
 
     const handleLetterPress = (letter: string, index: number) => {
         console.log('handleletter')
@@ -78,8 +76,20 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
         ))
     }
 
+    function generateUniqueRandomHiraganas(count: number): string {
+        const uniqueChars: Set<string> = new Set<string>();
+
+        while (uniqueChars.size < count) {
+            const randomIndex = Math.floor(Math.random() * HIRAGANA_JAPANESE.length);
+            uniqueChars.add(HIRAGANA_JAPANESE[randomIndex]);
+        }
+
+        return Array.from(uniqueChars).join('');
+    }
+
+
     const resetGame = () => {
-        const newRandomHiraganas = Array.from(Array(10)).map(() => HIRAGANA_JAPANESE[Math.floor(Math.random() * HIRAGANA_JAPANESE.length)]).join('')
+        const newRandomHiraganas = generateUniqueRandomHiraganas(10)
         setSrcLetters(newRandomHiraganas)
         setForSelectedLetters(newRandomHiraganas)
         setSelectedLetters({})
