@@ -108,7 +108,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
             <View>{renderNextLineButton()}</View>
             <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity style={styles.button} onPress={initStates}>
-                    <Text style={styles.buttonText}>もういちど</Text>
+                    <Text style={styles.buttonText}>さいしょから</Text>
                 </TouchableOpacity>
             </View>
         </View>
