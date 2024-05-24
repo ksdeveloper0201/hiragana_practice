@@ -10,7 +10,7 @@ const HeaderIcons: React.FC<Props> = ({ navigation }) => {
 
         <>
             {/* メニューアイコン */}
-            <TouchableOpacity style={styles.menuIcon} onPress={() => console.log("Menu pressed")}>
+            <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate("Menu")}>
                 <MaterialCommunityIcons name="menu" size={36} color="black" />
             </TouchableOpacity>
 

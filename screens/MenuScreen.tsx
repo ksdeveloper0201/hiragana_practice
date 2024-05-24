@@ -14,12 +14,12 @@ const MenuScreen: React.FC<Props> = ({ navigation }) => {
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>ひらがな</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord")}>
-                <Text style={styles.buttonText}>こえにだしてよむ</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MakeWordList")}>
+                <Text style={styles.buttonText}>ことばリストをつくる</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
-                <Text style={styles.buttonText}>あいうえお ぱずる</Text>
+                <Text style={styles.buttonText}>あいうえお パズル</Text>
             </TouchableOpacity>
         </View>
     );
