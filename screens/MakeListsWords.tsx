@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { ScrollView, View, Text, TouchableOpacity, Platform, TextInput } from "react-native";
+import { ScrollView, View, Text, TouchableOpacity, Platform, TextInput, FlatList } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
@@ -27,6 +27,16 @@ type ItemProps = {
     items: { wordId: number, listId: number, word: string }[] | null;
 }
 
+const Item: React.FC<{ item: { wordId: number, listId: number, word: string } }> = ({ item }) => {
+    return (
+        <TouchableOpacity
+            onPress={() => console.log("touch")}
+            style={styles.item}
+        >
+            <Text style={styles.itemText}>{item.word}</Text>
+        </TouchableOpacity >
+    );
+};
 
 
 const Items: React.FC<ItemProps> = ({ items }) => {
@@ -35,19 +45,15 @@ const Items: React.FC<ItemProps> = ({ items }) => {
     }
     return (
 
-        <View style={styles.sectionContainer}>
-            <ScrollView style={styles.listArea}>
-                {items.map(({ wordId, word }) => (
-                    <TouchableOpacity
-                        key={wordId}
-                        onPress={() => console.log("item pressed")}
-                        style={styles.item}
-                    >
-                        <Text style={styles.itemText}>{word}</Text>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
-        </View>
+        <FlatList
+            data={items}
+            renderItem={({ item }) => <Item item={item} />}
+            keyExtractor={(item) => item.listId.toString()}
+            contentContainerStyle={{
+                paddingBottom: 16,
+            }}
+            style={{ maxHeight: 5 * 40, minWidth: 32 }}
+        />
     );
 }
 
