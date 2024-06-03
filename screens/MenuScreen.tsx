@@ -14,7 +14,7 @@ const MenuScreen: React.FC<Props> = ({ navigation }) => {
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>ひらがな</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MakeWordList")}>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MakeList")}>
                 <Text style={styles.buttonText}>ことばリストをつくる</Text>
             </TouchableOpacity>
 

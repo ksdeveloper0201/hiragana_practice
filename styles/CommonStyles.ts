@@ -53,4 +53,47 @@ export const styles = StyleSheet.create({
         color: "blue",
         marginVertical: 20,
     },
+    flexRow: {
+        flexDirection: "row",
+    },
+    input: {
+        borderColor: "#4630eb",
+        borderRadius: 4,
+        borderWidth: 1,
+        flex: 1,
+        height: 48,
+        margin: 16,
+        padding: 8,
+    },
+    sectionContainer: {
+        marginBottom: 16,
+        marginHorizontal: 16,
+    },
+    sectionHeading: {
+        fontSize: 18,
+        marginBottom: 8,
+    },
+    item: {
+        backgroundColor: "#fff",
+        borderRadius: 8,
+        padding: 8,
+        marginVertical: 4,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    listArea: {
+        backgroundColor: "#f0f0f0",
+        flex: 1,
+        paddingTop: 16,
+    },
+    itemText: {
+        color: "#333",
+        fontSize: 16,
+    },
 });

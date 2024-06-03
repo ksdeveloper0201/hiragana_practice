@@ -25,12 +25,12 @@ const HeaderIcons: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
     homeIcon: {
         position: 'absolute',
-        top: 10,
+        top: 20,
         right: 10,
     },
     menuIcon: {
         position: 'absolute',
-        top: 10,
+        top: 20,
         left: 10,
     },
 }

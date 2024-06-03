@@ -8,8 +8,9 @@ import ShowWordScreen from "../screens/ShowWordScreen";
 import RandomPuzzleScreen from "../screens/RandomPuzzleScreen";
 import JapaneseOrderScreen from "../screens/JapaneseOrderScreen";
 import MenuScreen from "../screens/MenuScreen";
-import MakeWordListScreen from "../screens/MakeWordList";
-// import RecordVoiceScreen from "../screens/RecordVoiceScreen";
+import MakeListScreen from "../screens/MakeList";
+import MakeListsWordsScreen from "../screens/MakeListsWords";
+
 
 export type RootStackPropsList = {
     Home: undefined;
@@ -19,7 +20,8 @@ export type RootStackPropsList = {
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
     JapaneseOrder: { isKana: boolean };
-    MakeWordList: undefined
+    MakeList: undefined
+    MakeListsWords: { listId: number, listName: string }
     // Select: undefined;
 };
 
@@ -65,9 +67,14 @@ const AppNavigator = () => {
                     options={{ title: "もじをさがそう", headerShown: false }}
                 />
                 <Stack.Screen
-                    name="MakeWordList"
-                    component={MakeWordListScreen}
+                    name="MakeList"
+                    component={MakeListScreen}
                     options={{ title: "リストをつくる", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="MakeListsWords"
+                    component={MakeListsWordsScreen}
+                    options={{ title: "リストに単語を保存する", headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
