@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
@@ -86,6 +86,8 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        width: Dimensions.get("window").width - 32,
+        alignSelf: "center",
     },
     listArea: {
         backgroundColor: "#f0f0f0",

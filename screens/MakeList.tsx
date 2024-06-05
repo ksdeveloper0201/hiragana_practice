@@ -50,9 +50,9 @@ const Items: React.FC<ItemProps> = ({ items, navigation }) => {
             renderItem={({ item }) => <Item item={item} navigation={navigation} />}
             keyExtractor={(item) => item.listId.toString()}
             contentContainerStyle={{
-                paddingBottom: 16,
+                padding: 16,
             }}
-            style={{ maxHeight: 5 * 40, minWidth: 32 }}
+            style={{ maxHeight: 5 * 80 }}
         />
     );
 }

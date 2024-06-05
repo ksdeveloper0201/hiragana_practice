@@ -23,14 +23,28 @@ function openDatabase() {
 
 const db = openDatabase();
 
-type ItemProps = {
-    items: { wordId: number, listId: number, word: string }[] | null;
+type ItemsProps = {
+    items: ItemProps[];
+    onPressHandler: () => void
 }
+type ItemComponentProps = {
+    item: ItemProps,
+    onPressHandler: () => void
+}
+type ItemProps = { wordId: number, listId: number, word: string } | null;
 
-const Item: React.FC<{ item: { wordId: number, listId: number, word: string } }> = ({ item }) => {
+
+const Item: React.FC<ItemComponentProps> = ({ item, onPressHandler }) => {
+    if (!item) {
+        return (<Text>とくになし</Text>)
+    }
     return (
         <TouchableOpacity
-            onPress={() => console.log("touch")}
+            onPress={() => {
+                db.transaction((tx) => {
+                    tx.executeSql(`delete from words where wordId = ?`, [item.wordId], () => onPressHandler())
+                })
+            }}
             style={styles.item}
         >
             <Text style={styles.itemText}>{item.word}</Text>
@@ -39,7 +53,7 @@ const Item: React.FC<{ item: { wordId: number, listId: number, word: string } }>
 };
 
 
-const Items: React.FC<ItemProps> = ({ items }) => {
+const Items: React.FC<ItemsProps> = ({ items, onPressHandler }) => {
     if (items === null || items.length === 0) {
         return null;
     }
@@ -47,12 +61,12 @@ const Items: React.FC<ItemProps> = ({ items }) => {
 
         <FlatList
             data={items}
-            renderItem={({ item }) => <Item item={item} />}
-            keyExtractor={(item) => item.listId.toString()}
+            renderItem={({ item }) => <Item item={item} onPressHandler={onPressHandler} />}
+            keyExtractor={(item) => item!.listId.toString()}
             contentContainerStyle={{
-                paddingBottom: 16,
+                padding: 16,
             }}
-            style={{ maxHeight: 5 * 40, minWidth: 32 }}
+            style={{ maxHeight: 5 * 80 }}
         />
     );
 }
@@ -65,7 +79,7 @@ type Props = {
 
 const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
     const [text, setText] = useState<string>("")
-    const [items, setItems] = useState<{ wordId: number, listId: number, word: string }[] | null>(null);
+    const [items, setItems] = useState<ItemProps[] | null>(null);
 
 
     useEffect(() => {
@@ -75,7 +89,6 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
                 "create table if not exists words (wordId INTEGER PRIMARY KEY AUTOINCREMENT, listId integer, word text);"
             );
         });
-
         loadItems();
     }, []);
 
@@ -135,9 +148,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
                     value={text}
                 />
             </View>
-
-            <Items items={items} />
-
+            <Items items={items!} onPressHandler={() => loadItems()} />
             <TouchableOpacity style={styles.button} onPress={() => console.log("connected")}>
                 <Text style={styles.buttonText}>接続する</Text>
             </TouchableOpacity>
