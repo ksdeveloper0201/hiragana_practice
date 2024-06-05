@@ -4,6 +4,7 @@ import { ScrollView, View, Text, TouchableOpacity, Platform, TextInput, FlatList
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
+import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
 
 
 function openDatabase() {
@@ -38,17 +39,28 @@ const Item: React.FC<ItemComponentProps> = ({ item, onPressHandler }) => {
     if (!item) {
         return (<Text>とくになし</Text>)
     }
-    return (
-        <TouchableOpacity
-            onPress={() => {
+
+    const renderRightActions = () => {
+        return (
+            <RectButton style={styles.deleteButton} onPress={() => {
                 db.transaction((tx) => {
                     tx.executeSql(`delete from words where wordId = ?`, [item.wordId], () => onPressHandler())
                 })
-            }}
-            style={styles.item}
-        >
-            <Text style={styles.itemText}>{item.word}</Text>
-        </TouchableOpacity >
+            }}>
+                <Text style={styles.deleteButtonText}>削除</Text>
+            </RectButton>
+        )
+    }
+
+    return (
+        <GestureHandlerRootView>
+
+            <Swipeable renderRightActions={renderRightActions}>
+                <View style={styles.item}>
+                    <Text style={styles.itemText}>{item.word}</Text>
+                </View>
+            </Swipeable>
+        </GestureHandlerRootView>
     );
 };
 
@@ -58,7 +70,6 @@ const Items: React.FC<ItemsProps> = ({ items, onPressHandler }) => {
         return null;
     }
     return (
-
         <FlatList
             data={items}
             renderItem={({ item }) => <Item item={item} onPressHandler={onPressHandler} />}

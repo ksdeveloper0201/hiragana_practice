@@ -77,6 +77,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 8,
         padding: 8,
+        margin: 8,
         marginVertical: 4,
         shadowColor: "#000",
         shadowOffset: {
@@ -86,7 +87,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        width: Dimensions.get("window").width - 32,
+        width: Dimensions.get("window").width - 46,
         alignSelf: "center",
     },
     listArea: {
@@ -97,5 +98,18 @@ export const styles = StyleSheet.create({
     itemText: {
         color: "#333",
         fontSize: 16,
+    },
+    deleteButton: {
+        backgroundColor: "red",
+        justifyContent: "center",
+        alignItems: "center",
+        width: 80,
+        borderRadius: 8,
+        padding: 8,
+        marginVertical: 4,
+    },
+    deleteButtonText: {
+        color: "#fff",
+        fontWeight: "bold",
     },
 });
