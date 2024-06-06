@@ -53,14 +53,12 @@ const Item: React.FC<ItemComponentProps> = ({ item, onPressHandler }) => {
     }
 
     return (
-        <GestureHandlerRootView>
 
-            <Swipeable renderRightActions={renderRightActions}>
-                <View style={styles.item}>
-                    <Text style={styles.itemText}>{item.word}</Text>
-                </View>
-            </Swipeable>
-        </GestureHandlerRootView>
+        <Swipeable renderRightActions={renderRightActions}>
+            <View style={styles.item}>
+                <Text style={styles.itemText}>{item.word}</Text>
+            </View>
+        </Swipeable>
     );
 };
 
@@ -148,22 +146,23 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
-            <HeaderIcons navigation={navigation} />
-            <Text style={styles.subtitle}>{route.params.listName}</Text>
-            <View style={styles.flexRow}>
-                <TextInput
-                    onChangeText={(text) => setText(text)}
-                    onSubmitEditing={() => { add(text); }}
-                    placeholder="ことばをとうろく"
-                    style={styles.input}
-                    value={text}
-                />
-            </View>
-            <Items items={items!} onPressHandler={() => loadItems()} />
-            <TouchableOpacity style={styles.button} onPress={() => console.log("connected")}>
-                <Text style={styles.buttonText}>接続する</Text>
-            </TouchableOpacity>
-
+            <GestureHandlerRootView>
+                <HeaderIcons navigation={navigation} />
+                <Text style={styles.subtitle}>{route.params.listName}</Text>
+                <View style={styles.flexRow}>
+                    <TextInput
+                        onChangeText={(text) => setText(text)}
+                        onSubmitEditing={() => { add(text); }}
+                        placeholder="ことばをとうろく"
+                        style={styles.input}
+                        value={text}
+                    />
+                </View>
+                <Items items={items!} onPressHandler={() => loadItems()} />
+                <TouchableOpacity style={styles.button} onPress={() => console.log("connected")}>
+                    <Text style={styles.buttonText}>接続する</Text>
+                </TouchableOpacity>
+            </GestureHandlerRootView>
         </View>
     );
 };
