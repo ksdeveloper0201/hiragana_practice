@@ -34,8 +34,11 @@ export const styles = StyleSheet.create({
     inputForm: {
         margin: 44,
         fontSize: 24,
-        width: "40%",
-        borderColor: "gray",
+        width: "80%",
+        padding: 16,
+        borderColor: "#4630eb",
+        borderRadius: 4,
+        borderWidth: 1,
         borderStyle: "solid",
     },
     // inputword
@@ -75,7 +78,6 @@ export const styles = StyleSheet.create({
     },
     item: {
         backgroundColor: "#fff",
-        borderRadius: 8,
         padding: 8,
         margin: 8,
         marginVertical: 4,
@@ -104,7 +106,6 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: 80,
-        borderRadius: 8,
         padding: 8,
         marginVertical: 4,
     },

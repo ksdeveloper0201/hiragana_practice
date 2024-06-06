@@ -13,7 +13,7 @@ interface JapaneseOrderScreenProps {
 }
 
 const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, route }) => {
-    const wordList = route.params.isKana ? KANA_LIST : HIRAGANA_LIST;
+    const wordList = route.params.wordList;
 
     //選択中の文字（赤字にする文字）
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
@@ -86,13 +86,6 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
         setIsOverLine(false)
         setShowingWords("")
         setLineIndex(0)
-
-        // const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
-        // //一行が終わっているかの判定
-        // const [isOverLine, setIsOverLine] = useState<boolean>(false)
-        //画面に出力中の複数文字
-        // const [showingWords, setShowingWords] = useState<string>("")
-        // const [lineIndex, setLineIndex] = useState<number>(0)
     }
 
 

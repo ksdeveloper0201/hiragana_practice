@@ -5,6 +5,7 @@ import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
 import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
+import JapaneseOrderScreen from "./JapaneseOrderScreen";
 
 
 function openDatabase() {
@@ -53,7 +54,6 @@ const Item: React.FC<ItemComponentProps> = ({ item, onPressHandler }) => {
     }
 
     return (
-
         <Swipeable renderRightActions={renderRightActions}>
             <View style={styles.item}>
                 <Text style={styles.itemText}>{item.word}</Text>
@@ -145,25 +145,23 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
 
 
     return (
-        <View style={styles.container}>
-            <GestureHandlerRootView>
-                <HeaderIcons navigation={navigation} />
-                <Text style={styles.subtitle}>{route.params.listName}</Text>
-                <View style={styles.flexRow}>
-                    <TextInput
-                        onChangeText={(text) => setText(text)}
-                        onSubmitEditing={() => { add(text); }}
-                        placeholder="ことばをとうろく"
-                        style={styles.input}
-                        value={text}
-                    />
-                </View>
-                <Items items={items!} onPressHandler={() => loadItems()} />
-                <TouchableOpacity style={styles.button} onPress={() => console.log("connected")}>
-                    <Text style={styles.buttonText}>接続する</Text>
-                </TouchableOpacity>
-            </GestureHandlerRootView>
-        </View>
+        <GestureHandlerRootView style={styles.container}>
+            <HeaderIcons navigation={navigation} />
+            <Text style={styles.subtitle}>{route.params.listName}</Text>
+            <View style={styles.flexRow}>
+                <TextInput
+                    onChangeText={(text) => setText(text)}
+                    onSubmitEditing={() => { add(text); }}
+                    placeholder="ことばをとうろく"
+                    style={styles.input}
+                    value={text}
+                />
+            </View>
+            <Items items={items!} onPressHandler={() => loadItems()} />
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: items?.map((item) => item?.word) })}>
+                <Text style={styles.buttonText}>こえにだしてよむ</Text>
+            </TouchableOpacity>
+        </GestureHandlerRootView>
     );
 };
 

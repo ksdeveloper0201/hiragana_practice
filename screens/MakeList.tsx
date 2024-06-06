@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, TouchableOpacity, Platform, TextInput, ScrollVi
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
+import { GestureHandlerRootView, RectButton, Swipeable } from "react-native-gesture-handler";
+import { render } from "react-dom";
 
 
 function openDatabase() {
@@ -23,23 +25,52 @@ function openDatabase() {
 
 const db = openDatabase();
 
-type ItemProps = {
-    items: { listId: number, name: string }[] | null;
-    navigation: any
+type ItemsProps = {
+    items: ItemProps[],
+    navigation: any,
+    onPressHandler: () => void;
 }
 
-const Item: React.FC<{ item: { listId: number, name: string }, navigation: any }> = ({ item, navigation }) => {
+type ItemComponentProps = {
+    item: ItemProps,
+    navigation: any,
+    onPressHandler: () => void;
+}
+
+type ItemProps = { listId: number, name: string } | null;
+
+
+const Item: React.FC<ItemComponentProps> = ({ item, navigation, onPressHandler }) => {
+    const renderRightActions = () => {
+        return (
+            <RectButton style={styles.deleteButton} onPress={() => {
+                db.transaction((tx) => {
+                    tx.executeSql(`delete from words where listId = ?`, [item!.listId], () => onPressHandler())
+                })
+                db.transaction((tx) => {
+                    tx.executeSql(`delete from lists where listId = ?`, [item!.listId], () => onPressHandler())
+                })
+            }}>
+                <Text style={styles.deleteButtonText}>削除</Text>
+            </RectButton>
+        )
+    }
+
     return (
-        <TouchableOpacity
-            onPress={() => navigation.navigate("MakeListsWords", { listName: item.name, listId: item.listId })}
-            style={styles.item}
+        <Swipeable
+            renderRightActions={renderRightActions}
         >
-            <Text style={styles.itemText}>{item.name}</Text>
-        </TouchableOpacity>
+            <RectButton
+                onPress={() => navigation.navigate("MakeListsWords", { listName: item!.name, listId: item!.listId })}
+                style={styles.item}
+            >
+                <Text style={styles.itemText}>{item!.name}</Text>
+            </RectButton>
+        </Swipeable>
     );
 };
 
-const Items: React.FC<ItemProps> = ({ items, navigation }) => {
+const Items: React.FC<ItemsProps> = ({ items, navigation, onPressHandler }) => {
     if (items === null || items.length === 0) {
         return null;
     }
@@ -47,8 +78,8 @@ const Items: React.FC<ItemProps> = ({ items, navigation }) => {
     return (
         <FlatList
             data={items}
-            renderItem={({ item }) => <Item item={item} navigation={navigation} />}
-            keyExtractor={(item) => item.listId.toString()}
+            renderItem={({ item }) => <Item item={item} navigation={navigation} onPressHandler={onPressHandler} />}
+            keyExtractor={(item) => item!.listId.toString()}
             contentContainerStyle={{
                 padding: 16,
             }}
@@ -64,7 +95,7 @@ type Props = {
 
 const MakeListScreen: React.FC<Props> = ({ navigation }) => {
     const [text, setText] = useState<string>("")
-    const [items, setItems] = useState<{ listId: number, name: string }[] | null>(null);
+    const [items, setItems] = useState<ItemProps[] | null>(null);
 
 
     useEffect(() => {
@@ -113,7 +144,7 @@ const MakeListScreen: React.FC<Props> = ({ navigation }) => {
 
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.subtitle}>ことばリスト</Text>
             <View style={styles.flexRow}>
@@ -125,13 +156,13 @@ const MakeListScreen: React.FC<Props> = ({ navigation }) => {
                     value={text}
                 />
             </View>
-            <Items items={items} navigation={navigation} />
+            <Items items={items!} navigation={navigation} onPressHandler={() => loadItems()} />
 
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>接続する</Text>
+                <Text style={styles.buttonText}>ぜんぶ けす</Text>
             </TouchableOpacity>
 
-        </View>
+        </GestureHandlerRootView>
     );
 };
 

@@ -19,7 +19,7 @@ export type RootStackPropsList = {
     Menu: undefined;
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
-    JapaneseOrder: { isKana: boolean };
+    JapaneseOrder: { wordList: string[] };
     MakeList: undefined
     MakeListsWords: { listId: number, listName: string }
     // Select: undefined;
