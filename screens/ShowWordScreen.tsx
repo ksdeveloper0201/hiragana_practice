@@ -1,14 +1,24 @@
 import { RouteProp } from "@react-navigation/native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
 interface ShowWordScreenProps { route: ShowWordScreenRouteProp, navigation: any }
 
 const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) => {
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
+        return () => {
+            ScreenOrientation.unlockAsync();
+        };
+    }, [])
+
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
 
     const handleLetterPress = (letter: string, index: number) => {

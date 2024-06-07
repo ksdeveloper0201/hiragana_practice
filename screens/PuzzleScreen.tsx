@@ -2,12 +2,16 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import { HIRAGANA_LIST, KANA_LIST } from "../enums/words-enum";
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { useEffect } from "react";
+
 
 type Props = {
     navigation: any;
 };
 
 const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
             <HeaderIcons navigation={navigation} />

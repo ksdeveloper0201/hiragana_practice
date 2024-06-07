@@ -5,6 +5,8 @@ import { styles } from "../styles/CommonStyles";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import { HIRAGANA_JAPANESE } from "../enums/words-enum";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 
 
@@ -30,6 +32,14 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
 
         setSrcLetters(randomHiraganas)
         setForSelectedLetters(randomHiraganas)
+    }, [])
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
+        return () => {
+            ScreenOrientation.unlockAsync();
+        };
     }, [])
 
     useEffect(() => {

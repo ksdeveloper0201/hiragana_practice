@@ -5,6 +5,8 @@ import { styles } from "../styles/CommonStyles";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import { HIRAGANA_LIST, KANA_LIST } from "../enums/words-enum";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 type JapaneseOrderScreenRouteProp = RouteProp<RootStackPropsList, 'JapaneseOrder'>
 interface JapaneseOrderScreenProps {
@@ -23,6 +25,14 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
     const [showingWords, setShowingWords] = useState<string>("")
     const [lineIndex, setLineIndex] = useState<number>(0)
     // const [letterIndex, setLetterIndex] = useState<number>(0)
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
+        return () => {
+            ScreenOrientation.unlockAsync();
+        };
+    }, [])
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {

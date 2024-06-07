@@ -3,12 +3,16 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
+import * as ScreenOrientation from 'expo-screen-orientation';
+import { useEffect } from "react";
+
 
 type Props = {
     navigation: any;
 };
 
 const MenuScreen: React.FC<Props> = ({ navigation }) => {
+
     return (
         <View style={styles.container}>
             <HeaderIcons navigation={navigation} />

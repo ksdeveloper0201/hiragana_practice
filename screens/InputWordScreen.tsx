@@ -8,6 +8,7 @@ import { styles } from "../styles/CommonStyles";
 
 
 
+
 type Props = {
     navigation: any | undefined;
 };
@@ -15,6 +16,7 @@ type Props = {
 const InputWordScreen: React.FC<Props> = ({ navigation }) => {
 
     const [inputValue, setInputValue] = useState("");
+
 
     useEffect(() => {
         const unsubscribe = navigation.addListener("blur", () => {

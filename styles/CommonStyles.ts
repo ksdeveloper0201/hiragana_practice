@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        width: Dimensions.get("window").width - 46,
+        width: Dimensions.get("window").width - 80,
         alignSelf: "center",
     },
     listArea: {
