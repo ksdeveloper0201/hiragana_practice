@@ -5,6 +5,7 @@ import { RootStackPropsList } from "../navigation/AppNavigator";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
@@ -41,7 +42,7 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
     }
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <View >
@@ -49,15 +50,15 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
                     {renderLetters()}
                 </Text>
             </View>
-            <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button} onPress={() => setSelectedLetters({})}>
+            <View style={{ flexDirection: "column" }}>
+                <RectButton style={styles.button} onPress={() => setSelectedLetters({})}>
                     <Text style={styles.buttonText}>もういちど</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord",)}>
+                </RectButton>
+                <RectButton style={styles.button} onPress={() => navigation.navigate("InputWord",)}>
                     <Text style={styles.buttonText}>つぎ</Text>
-                </TouchableOpacity>
+                </RectButton>
             </View>
-        </View>
+        </GestureHandlerRootView>
     );
 };
 

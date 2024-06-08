@@ -5,6 +5,7 @@ import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect } from "react";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 type Props = {
@@ -14,18 +15,18 @@ type Props = {
 const MenuScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>ひらがな</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MakeList")}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("MakeList")}>
                 <Text style={styles.buttonText}>ことばリストをつくる</Text>
-            </TouchableOpacity>
+            </RectButton>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
                 <Text style={styles.buttonText}>あいうえお パズル</Text>
-            </TouchableOpacity>
-        </View>
+            </RectButton>
+        </GestureHandlerRootView>
     );
 };
 

@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, Dimensions, Button } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import { HIRAGANA_LIST, KANA_LIST } from "../enums/words-enum";
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
-type JapaneseOrderScreenRouteProp = RouteProp<RootStackPropsList, 'JapaneseOrder'>
-interface JapaneseOrderScreenProps {
-    route: JapaneseOrderScreenRouteProp
+type ShowWordListScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWordList'>
+interface ShowWordListScreenProps {
+    route: ShowWordListScreenRouteProp
     navigation: any
 }
 
-const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, route }) => {
+const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, route }) => {
     const wordList = route.params.wordList;
 
     //選択中の文字（赤字にする文字）
@@ -33,6 +34,7 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
             ScreenOrientation.unlockAsync();
         };
     }, [])
+
 
     const renderOrderJapanese = () => {
         // orderedJapanese.map((line: any) => {
@@ -79,18 +81,6 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
     }
 
 
-    const renderNextLineButton = () => {
-        if (isOverLine) {
-            return (
-                <TouchableOpacity style={styles.button} onPress={initNextLine}>
-                    <Text style={styles.buttonText}>つぎのぎょう</Text>
-                </TouchableOpacity>
-            )
-        } else {
-            return null;
-        }
-    }
-
     const initStates = () => {
         setSelectedLetters({})
         setIsOverLine(false)
@@ -98,9 +88,8 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
         setLineIndex(0)
     }
 
-
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよむ</Text>
             <View >
@@ -108,15 +97,18 @@ const JapaneseOrderScreen: React.FC<JapaneseOrderScreenProps> = ({ navigation, r
                     {renderOrderJapanese()}
                 </Text>
             </View>
-            <View>{renderNextLineButton()}</View>
-            <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button} onPress={initStates}>
+            <View style={styles.buttonContainer}>
+                <RectButton style={styles.button} onPress={initStates}>
                     <Text style={styles.buttonText}>さいしょから</Text>
-                </TouchableOpacity>
+                </RectButton>
+                <RectButton style={isOverLine ? { ...styles.button, backgroundColor: 'red' } : styles.button} enabled={isOverLine} onPress={initNextLine}>
+                    <Text style={styles.buttonText}>つぎのぎょう</Text>
+                </RectButton>
             </View>
-        </View>
+        </GestureHandlerRootView>
     );
 }
 
 
-export default JapaneseOrderScreen;
+export default ShowWordListScreen;
+

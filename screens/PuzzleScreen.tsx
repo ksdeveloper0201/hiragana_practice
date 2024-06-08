@@ -4,6 +4,7 @@ import { styles } from "../styles/CommonStyles";
 import { HIRAGANA_LIST, KANA_LIST } from "../enums/words-enum";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect } from "react";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 type Props = {
@@ -13,20 +14,20 @@ type Props = {
 const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>あいうえお パズル</Text>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: HIRAGANA_LIST })}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: HIRAGANA_LIST })}>
                 <Text style={styles.buttonText}>あいうえお（ひらがな）</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: KANA_LIST })}>
+            </RectButton>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: KANA_LIST })}>
                 <Text style={styles.buttonText}>あいうえお（カタカナ）</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>
+            </RectButton>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>
                 <Text style={styles.buttonText}>らんだむ</Text>
-            </TouchableOpacity>
+            </RectButton>
 
-        </View>
+        </GestureHandlerRootView>
 
     );
 };

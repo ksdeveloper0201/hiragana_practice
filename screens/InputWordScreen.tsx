@@ -5,6 +5,7 @@ import { RouteProp } from "@react-navigation/native";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 
@@ -30,14 +31,14 @@ const InputWordScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.subtitle}>こえにだしてよむ</Text>
             <TextInput placeholder="ひらがな" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
-            <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
+            <RectButton style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
                 <Text style={styles.buttonText}>けってい</Text>
-            </TouchableOpacity>
-        </View>
+            </RectButton>
+        </GestureHandlerRootView>
     );
 };
 

@@ -16,8 +16,11 @@ export const styles = StyleSheet.create({
     subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
     smallTitle: { fontSize: 20, fontWeight: "bold" },
     // button
-    buttonView: {
-        marginVertical: 10,
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        // backgroundColor: "red",
+        width: Dimensions.get("window").width - 100,
     },
     button: {
         alignItems: "center",
@@ -26,6 +29,16 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 15,
         paddingVertical: 5,
         borderRadius: 25,
+    },
+    moreButton: {
+        position: "absolute",
+        bottom: 40,
+        left: 32,
+    },
+    nextButton: {
+        position: "absolute",
+        bottom: 40,
+        right: 32,
     },
     buttonText: {
         fontSize: 24,

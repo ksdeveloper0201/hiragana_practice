@@ -6,6 +6,7 @@ import { RouteProp } from "@react-navigation/native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import { HIRAGANA_JAPANESE } from "../enums/words-enum";
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 
@@ -80,9 +81,9 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
 
     const renderLetters = () => {
         return forSelectLetters.split('').map((letter, index) => (
-            <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
+            <RectButton key={index} onPress={() => handleLetterPress(letter, index)}>
                 <Text style={gameOver ? styles.smallTitle : { fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
-            </TouchableOpacity>
+            </RectButton>
         ))
     }
 
@@ -108,7 +109,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     }
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>もじをさがそう</Text>
             <Text style={gameOver ? styles.gameOver : styles.showWord}>{showingLetters}</Text>
@@ -120,11 +121,11 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                 </View>
                 )}
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button} onPress={resetGame}>
+                <RectButton style={styles.button} onPress={resetGame}>
                     <Text style={styles.buttonText}>もういちど</Text>
-                </TouchableOpacity>
+                </RectButton>
             </View>
-        </View>);
+        </GestureHandlerRootView>);
 }
 
 export default RandomPuzzleScreen;

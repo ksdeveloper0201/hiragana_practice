@@ -6,10 +6,10 @@ import PuzzleScreen from "../screens/PuzzleScreen";
 import InputWordScreen from "../screens/InputWordScreen";
 import ShowWordScreen from "../screens/ShowWordScreen";
 import RandomPuzzleScreen from "../screens/RandomPuzzleScreen";
-import JapaneseOrderScreen from "../screens/JapaneseOrderScreen";
 import MenuScreen from "../screens/MenuScreen";
 import MakeListScreen from "../screens/MakeList";
 import MakeListsWordsScreen from "../screens/MakeListsWords";
+import ShowWordListScreen from "../screens/ShowWordListScreen";
 
 
 export type RootStackPropsList = {
@@ -19,7 +19,7 @@ export type RootStackPropsList = {
     Menu: undefined;
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
-    JapaneseOrder: { wordList: string[] };
+    ShowWordList: { wordList: string[] };
     MakeList: undefined
     MakeListsWords: { listId: number, listName: string }
     // Select: undefined;
@@ -62,8 +62,8 @@ const AppNavigator = () => {
                     options={{ title: "もじをさがそう", headerShown: false }}
                 />
                 <Stack.Screen
-                    name="JapaneseOrder"
-                    component={JapaneseOrderScreen}
+                    name="ShowWordList"
+                    component={ShowWordListScreen}
                     options={{ title: "もじをさがそう", headerShown: false }}
                 />
                 <Stack.Screen

@@ -5,7 +5,7 @@ import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
 import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
-import JapaneseOrderScreen from "./JapaneseOrderScreen";
+import JapaneseOrderScreen from "./ShowWordListScreen";
 
 
 function openDatabase() {
@@ -158,9 +158,9 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
                 />
             </View>
             <Items items={items!} onPressHandler={() => loadItems()} />
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: items?.map((item) => item?.word) })}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: items?.map((item) => item?.word) })}>
                 <Text style={styles.buttonText}>こえにだしてよむ</Text>
-            </TouchableOpacity>
+            </RectButton>
         </GestureHandlerRootView>
     );
 };

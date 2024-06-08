@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 
 type Props = {
@@ -13,18 +14,18 @@ type Props = {
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
-        <View style={styles.container}>
+        <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>ひらがな</Text>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("InputWord")}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("InputWord")}>
                 <Text style={styles.buttonText}>こえにだしてよむ</Text>
-            </TouchableOpacity>
+            </RectButton>
 
-            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
                 <Text style={styles.buttonText}>あいうえお ぱずる</Text>
-            </TouchableOpacity>
-        </View>
+            </RectButton>
+        </GestureHandlerRootView>
     );
 };
 
