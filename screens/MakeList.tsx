@@ -6,6 +6,8 @@ import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
 import { GestureHandlerRootView, RectButton, Swipeable } from "react-native-gesture-handler";
 import { render } from "react-dom";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 
 function openDatabase() {
@@ -41,6 +43,15 @@ type ItemProps = { listId: number, name: string } | null;
 
 
 const Item: React.FC<ItemComponentProps> = ({ item, navigation, onPressHandler }) => {
+
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+
+        return () => {
+            ScreenOrientation.unlockAsync();
+        };
+    }, [])
+
     const renderRightActions = () => {
         return (
             <RectButton style={styles.deleteButton} onPress={() => {

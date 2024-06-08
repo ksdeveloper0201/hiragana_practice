@@ -11,12 +11,12 @@ const HeaderIcons: React.FC<Props> = ({ navigation }) => {
         <>
             {/* メニューアイコン */}
             <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.navigate("Menu")}>
-                <MaterialCommunityIcons name="menu" size={36} color="black" />
+                <MaterialCommunityIcons name="menu" size={48} color="black" />
             </TouchableOpacity>
 
             {/* ホームアイコン */}
             <TouchableOpacity style={styles.homeIcon} onPress={() => navigation.navigate("Home")}>
-                <MaterialCommunityIcons name="home-circle" size={36} color="black" />
+                <MaterialCommunityIcons name="home-circle" size={48} color="black" />
             </TouchableOpacity>
         </>
     )
@@ -25,13 +25,13 @@ const HeaderIcons: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
     homeIcon: {
         position: 'absolute',
-        top: 20,
-        right: 10,
+        top: 40,
+        right: 32,
     },
     menuIcon: {
         position: 'absolute',
-        top: 20,
-        left: 10,
+        top: 40,
+        left: 32,
     },
 }
 )
