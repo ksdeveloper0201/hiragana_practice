@@ -16,7 +16,7 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
-            <Text style={styles.title}>あいうえお パズル</Text>
+            <Text style={{ ...styles.title, fontSize: 36 }}>あいうえおであそぶ</Text>
             <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: HIRAGANA_LIST, isRandom: false })}>
                 <Text style={styles.buttonText}>あいうえお（ひらがな）</Text>
             </RectButton>
