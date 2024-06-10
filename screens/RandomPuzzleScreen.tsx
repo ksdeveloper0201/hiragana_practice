@@ -81,9 +81,9 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
 
     const renderLetters = () => {
         return forSelectLetters.split('').map((letter, index) => (
-            <RectButton key={index} onPress={() => handleLetterPress(letter, index)}>
-                <Text style={gameOver ? styles.smallTitle : { fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
-            </RectButton>
+            <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
+                <Text style={gameOver ? styles.smallTitle : { ...styles.selectedLetter, marginTop: 0, marginBottom: 0, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+            </TouchableOpacity>
         ))
     }
 
@@ -112,7 +112,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>もじをさがそう</Text>
-            <Text style={gameOver ? styles.gameOver : styles.showWord}>{showingLetters}</Text>
+            <Text style={gameOver ? styles.gameOver : { ...styles.showWord, fontSize: 52 }}>{showingLetters}</Text>
             {!gameOver &&
                 (<View>
                     <Text style={styles.showWord}>
@@ -121,7 +121,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                 </View>
                 )}
             <View style={{ flexDirection: "row" }}>
-                <RectButton style={styles.button} onPress={resetGame}>
+                <RectButton style={{ ...styles.button, backgroundColor: '#58aef5' }} onPress={resetGame}>
                     <Text style={styles.buttonText}>もういちど</Text>
                 </RectButton>
             </View>

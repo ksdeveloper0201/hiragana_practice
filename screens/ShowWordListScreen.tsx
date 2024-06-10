@@ -16,7 +16,8 @@ interface ShowWordListScreenProps {
 }
 
 const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, route }) => {
-    const wordList = route.params.wordList;
+    console.log(route.params.wordList)
+    const [wordList, setWordList] = useState<string[]>(route.params.wordList);
 
     //選択中の文字（赤字にする文字）
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
@@ -25,22 +26,29 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
     //画面に出力中の複数文字
     const [showingWords, setShowingWords] = useState<string>("")
     const [lineIndex, setLineIndex] = useState<number>(0)
-    // const [letterIndex, setLetterIndex] = useState<number>(0)
 
     useEffect(() => {
         ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
+        // シャッフルされたリストを設定
+        if (route.params.isRandom) {
+            const shuffledList = shuffleArray(route.params.wordList);
+            setWordList(shuffledList);
+        }
 
         return () => {
             ScreenOrientation.unlockAsync();
         };
     }, [])
 
+    const shuffleArray = (array: string[]) => {
+        return array.sort(() => Math.random() - 0.5);
+    }
 
     const renderOrderJapanese = () => {
-        // orderedJapanese.map((line: any) => {
         if (lineIndex === wordList.length) {
             console.log("its over")
-            return (<Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: 'red' }}>よくできました</Text>
+            return (<Text style={{ ...styles.selectedLetter, color: "red" }}>よくできました</Text>
             )
         }
         if (!showingWords) setShowingWords(wordList[lineIndex])
@@ -50,14 +58,13 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
         console.log(wordList[lineIndex])
         return wordList[lineIndex].split("").map((letter: string, index: number) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
-                <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+                <Text style={{ ...styles.selectedLetter, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity >
         ))
     }
 
 
     const handleLetterPress = (letter: string, index: number) => {
-        // setLetterIndex(index)
         if (index == 0 || selectedLetters[`${showingWords[index - 1]}${index - 1}`] === true) {
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: true
@@ -86,23 +93,25 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
         setIsOverLine(false)
         setShowingWords("")
         setLineIndex(0)
+        if (route.params.isRandom) {
+            const shuffledList = shuffleArray(route.params.wordList);
+            setWordList(shuffledList);
+        }
     }
 
     return (
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
-            <Text style={styles.smallTitle}>こえにだしてよむ</Text>
-            <View >
-                <Text style={styles.showWord}>
-                    {renderOrderJapanese()}
-                </Text>
+            <Text style={styles.smallTitle}>こえにだしてよもう</Text>
+            <View style={styles.showWord} >
+                {renderOrderJapanese()}
             </View>
-            <View style={styles.buttonContainer}>
-                <RectButton style={styles.button} onPress={initStates}>
+            <View style={{ ...styles.buttonContainer, width: '90%' }}>
+                <RectButton style={{ ...styles.button, backgroundColor: '#58aef5' }} onPress={initStates}>
                     <Text style={styles.buttonText}>さいしょから</Text>
                 </RectButton>
-                <RectButton style={isOverLine ? { ...styles.button, backgroundColor: 'red' } : styles.button} enabled={isOverLine} onPress={initNextLine}>
-                    <Text style={styles.buttonText}>つぎのぎょう</Text>
+                <RectButton style={isOverLine ? { ...styles.button, backgroundColor: '#73fa73' } : { ...styles.button, backgroundColor: '#D3D3D3' }} enabled={isOverLine} onPress={initNextLine}>
+                    <Text style={isOverLine ? styles.buttonText : { ...styles.buttonText, color: 'white' }}>つぎのぎょう</Text>
                 </RectButton>
             </View>
         </GestureHandlerRootView>
@@ -111,4 +120,3 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
 
 
 export default ShowWordListScreen;
-

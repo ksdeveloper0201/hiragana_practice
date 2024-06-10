@@ -19,11 +19,15 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
             <Text style={styles.title}>ひらがな</Text>
 
             <RectButton style={styles.button} onPress={() => navigation.navigate("InputWord")}>
-                <Text style={styles.buttonText}>こえにだしてよむ</Text>
+                <Text style={styles.buttonText}>こえにだしてよもう</Text>
             </RectButton>
 
             <RectButton style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
-                <Text style={styles.buttonText}>あいうえお ぱずる</Text>
+                <Text style={styles.buttonText}>あいうえおであそぶ</Text>
+            </RectButton>
+
+            <RectButton style={styles.button} onPress={() => navigation.navigate("MakeList")}>
+                <Text style={styles.buttonText}>リストからあそぶ</Text>
             </RectButton>
         </GestureHandlerRootView>
     );

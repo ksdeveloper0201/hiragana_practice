@@ -33,7 +33,7 @@ const InputWordScreen: React.FC<Props> = ({ navigation }) => {
     return (
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
-            <Text style={styles.subtitle}>こえにだしてよむ</Text>
+            <Text style={styles.subtitle}>こえにだしてよもう</Text>
             <TextInput placeholder="ひらがな" value={inputValue} onChangeText={handleInputChange} style={styles.inputForm}></TextInput>
             <RectButton style={styles.button} onPress={() => { navigation.navigate("ShowWord", { inputValue: inputValue !== "" ? inputValue : "ひらがな" }) }}>
                 <Text style={styles.buttonText}>けってい</Text>

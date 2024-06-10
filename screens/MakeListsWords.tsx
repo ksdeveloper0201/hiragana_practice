@@ -158,8 +158,11 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
                 />
             </View>
             <Items items={items!} onPressHandler={() => loadItems()} />
-            <RectButton style={styles.button} onPress={() => navigation.navigate("JapaneseOrder", { wordList: items?.map((item) => item?.word) })}>
-                <Text style={styles.buttonText}>こえにだしてよむ</Text>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: items?.map((item) => item?.word) })}>
+                <Text style={styles.buttonText}>こえにだしてよもう（じゅんばん）</Text>
+            </RectButton>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: items?.map((item) => item?.word), isRandom: true })}>
+                <Text style={styles.buttonText}>こえにだしてよもう（ランダム）</Text>
             </RectButton>
         </GestureHandlerRootView>
     );

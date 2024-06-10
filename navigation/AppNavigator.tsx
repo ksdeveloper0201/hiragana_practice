@@ -19,7 +19,7 @@ export type RootStackPropsList = {
     Menu: undefined;
     ShowWord: { inputValue: string };
     RandomPuzzle: undefined;
-    ShowWordList: { wordList: string[] };
+    ShowWordList: { wordList: string[], isRandom?: boolean };
     MakeList: undefined
     MakeListsWords: { listId: number, listName: string }
     // Select: undefined;

@@ -17,10 +17,10 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>あいうえお パズル</Text>
-            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: HIRAGANA_LIST })}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: HIRAGANA_LIST, isRandom: false })}>
                 <Text style={styles.buttonText}>あいうえお（ひらがな）</Text>
             </RectButton>
-            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: KANA_LIST })}>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: KANA_LIST, isRandom: false })}>
                 <Text style={styles.buttonText}>あいうえお（カタカナ）</Text>
             </RectButton>
             <RectButton style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>

@@ -36,7 +36,7 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
     const renderLetters = () => {
         return route.params.inputValue.split('').map((letter, index) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
-                <Text style={{ fontSize: 46, marginHorizontal: 8, marginTop: 24, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+                <Text style={{ ...styles.selectedLetter, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity>
         ))
     }
@@ -44,17 +44,15 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
     return (
         <GestureHandlerRootView style={styles.container}>
             <HeaderIcons navigation={navigation} />
-            <Text style={styles.smallTitle}>こえにだしてよむ</Text>
-            <View >
-                <Text style={styles.showWord}>
-                    {renderLetters()}
-                </Text>
+            <Text style={styles.smallTitle}>こえにだしてよもう</Text>
+            <View style={styles.showWord} >
+                {renderLetters()}
             </View>
-            <View style={{ flexDirection: "column" }}>
-                <RectButton style={styles.button} onPress={() => setSelectedLetters({})}>
+            <View style={{ ...styles.buttonContainer, width: '90%' }}>
+                <RectButton style={{ ...styles.button, backgroundColor: '#58aef5' }} onPress={() => setSelectedLetters({})}>
                     <Text style={styles.buttonText}>もういちど</Text>
                 </RectButton>
-                <RectButton style={styles.button} onPress={() => navigation.navigate("InputWord",)}>
+                <RectButton style={{ ...styles.button, backgroundColor: '#73fa73' }} onPress={() => navigation.navigate("InputWord",)}>
                     <Text style={styles.buttonText}>つぎ</Text>
                 </RectButton>
             </View>

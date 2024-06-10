@@ -14,13 +14,12 @@ export const styles = StyleSheet.create({
         marginBottom: 15,
     },
     subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
-    smallTitle: { fontSize: 20, fontWeight: "bold" },
+    smallTitle: { fontSize: 28, fontWeight: "bold" },
     // button
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "space-between",
-        // backgroundColor: "red",
-        width: Dimensions.get("window").width - 100,
+        // backgroundColor: "gray",
     },
     button: {
         alignItems: "center",
@@ -28,18 +27,19 @@ export const styles = StyleSheet.create({
         margin: 10,
         paddingHorizontal: 15,
         paddingVertical: 5,
-        borderRadius: 25,
+        borderRadius: 20,
     },
-    moreButton: {
-        position: "absolute",
-        bottom: 40,
-        left: 32,
-    },
-    nextButton: {
-        position: "absolute",
-        bottom: 40,
-        right: 32,
-    },
+    // moreButton: {
+    //     position: "absolute",
+    //     bottom: 40,
+    //     left: 32,
+    //     backgroundColor: "blue",
+    // },
+    // nextButton: {
+    //     position: "absolute",
+    //     bottom: 40,
+    //     right: 32,
+    // },
     buttonText: {
         fontSize: 24,
         paddingHorizontal: 5,
@@ -58,6 +58,16 @@ export const styles = StyleSheet.create({
     showWord: {
         fontSize: 58,
         margin: 24,
+        // backgroundColor: "gray",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    selectedLetter: {
+        fontSize: 68,
+        marginHorizontal: 8,
+        marginTop: 24,
+        marginBottom: 24,
     },
     showWordButtonText: {
         fontSize: 20,
@@ -102,7 +112,7 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        width: Dimensions.get("window").width - 80,
+        width: Dimensions.get("window").width - 50,
         alignSelf: "center",
     },
     listArea: {
