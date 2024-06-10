@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
 
     // title
     title: {
-        fontSize: 36,
+        fontSize: 52,
         fontWeight: "bold",
-        marginBottom: 15,
+        marginBottom: 40,
     },
     subtitle: { fontSize: 24, fontWeight: "bold", margin: 10 },
     smallTitle: { fontSize: 28, fontWeight: "bold" },
@@ -25,8 +25,8 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#DDDDDD",
         margin: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 5,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
         borderRadius: 20,
     },
     // moreButton: {
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     //     right: 32,
     // },
     buttonText: {
-        fontSize: 24,
+        fontSize: 32,
         paddingHorizontal: 5,
     },
     inputForm: {
