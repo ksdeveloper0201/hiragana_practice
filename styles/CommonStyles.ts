@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     //     right: 32,
     // },
     buttonText: {
-        fontSize: 28,
+        fontSize: 24,
         paddingHorizontal: 5,
     },
     inputForm: {
