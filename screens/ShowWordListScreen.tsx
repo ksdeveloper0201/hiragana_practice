@@ -54,6 +54,15 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
         }
         if (!showingWords) setShowingWords(wordList[lineIndex])
 
+        // 一文字の単語の場合
+        if (wordList[lineIndex].length === 1) {
+            return (
+                <TouchableOpacity key={0} onPress={() => handleLetterPress(wordList[lineIndex], 0)}>
+                    <Text style={{ ...styles.selectedLetter, color: selectedLetters[`${wordList[lineIndex]}0`] ? 'red' : 'black' }}>{wordList[lineIndex]}</Text>
+                </TouchableOpacity>
+            )
+        }
+
         console.log(lineIndex)
         console.log(selectedLetters)
         console.log(wordList[lineIndex])
@@ -70,7 +79,8 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
             setSelectedLetters(prevState => ({
                 ...prevState, [`${letter}${index}`]: true
             }))
-            if (index !== 0 && showingWords.length === index + 1) {
+            // 単語が一文字の場合、または最後の文字が選択された場合に行の終わりを設定
+            if (showingWords.length === 1 || (index !== 0 && showingWords.length === index + 1)) {
                 setIsOverLine(true)
             }
         }
