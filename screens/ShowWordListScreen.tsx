@@ -16,8 +16,7 @@ interface ShowWordListScreenProps {
 }
 
 const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, route }) => {
-    console.log(route.params.wordList)
-    const [wordList, setWordList] = useState<string[]>(route.params.wordList);
+    const [wordList, setWordList] = useState<string[]>([]);
 
     //選択中の文字（赤字にする文字）
     const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({})
@@ -34,6 +33,8 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
         if (route.params.isRandom) {
             const shuffledList = shuffleArray(route.params.wordList);
             setWordList(shuffledList);
+        } else {
+            setWordList(route.params.wordList)
         }
 
         return () => {
@@ -96,6 +97,8 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
         if (route.params.isRandom) {
             const shuffledList = shuffleArray(route.params.wordList);
             setWordList(shuffledList);
+        } else {
+            setWordList(route.params.wordList)
         }
     }
 
