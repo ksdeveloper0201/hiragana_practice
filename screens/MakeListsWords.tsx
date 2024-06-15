@@ -1,11 +1,10 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { ScrollView, View, Text, TouchableOpacity, Platform, TextInput, FlatList } from "react-native";
+import { View, Text, Platform, TextInput, FlatList } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
 import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
-import JapaneseOrderScreen from "./ShowWordListScreen";
 
 
 function openDatabase() {
@@ -19,7 +18,7 @@ function openDatabase() {
         }
 
     }
-    const db = SQLite.openDatabase("sampleDb.db");
+    const db = SQLite.openDatabase("hiragana.db");
     return db;
 }
 
@@ -105,7 +104,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
         console.log(`loadItems: ${items}`)
         db.transaction((tx) => {
             tx.executeSql(
-                `select * from words where listId = ?`,
+                `select * from words where listId = ? order by wordId desc`,
                 [route.params.listId],
                 (_, { rows: { _array } }) => {
                     setItems(_array)

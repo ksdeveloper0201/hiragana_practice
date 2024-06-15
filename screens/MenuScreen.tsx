@@ -1,10 +1,7 @@
 import * as React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Text } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
-import * as ScreenOrientation from 'expo-screen-orientation';
-import { useEffect } from "react";
 import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 
 

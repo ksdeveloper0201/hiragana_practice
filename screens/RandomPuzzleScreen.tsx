@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
+import { View, Text, TouchableOpacity } from "react-native"
 import HeaderIcons from "../components/HeaderIcons"
 import { styles } from "../styles/CommonStyles";
-import { RouteProp } from "@react-navigation/native";
-import { RootStackPropsList } from "../navigation/AppNavigator";
 import { HIRAGANA_JAPANESE } from "../enums/words-enum";
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";

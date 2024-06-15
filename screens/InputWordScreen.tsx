@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-import { RootStackPropsList } from "../navigation/AppNavigator";
-import { RouteProp } from "@react-navigation/native";
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { Text, TextInput } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";

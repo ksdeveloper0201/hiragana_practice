@@ -1,6 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Button, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
