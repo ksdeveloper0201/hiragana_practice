@@ -25,6 +25,9 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
             <RectButton style={styles.button} onPress={() => navigation.navigate("RandomPuzzle")}>
                 <Text style={styles.buttonText}>ランダム（ひらがな）</Text>
             </RectButton>
+            <RectButton style={styles.button} onPress={() => navigation.navigate("PrepareNumber")}>
+                <Text style={styles.buttonText}>すうじ</Text>
+            </RectButton>
 
         </GestureHandlerRootView>
 

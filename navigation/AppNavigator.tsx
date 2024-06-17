@@ -10,6 +10,7 @@ import MenuScreen from "../screens/MenuScreen";
 import MakeListScreen from "../screens/MakeList";
 import MakeListsWordsScreen from "../screens/MakeListsWords";
 import ShowWordListScreen from "../screens/ShowWordListScreen";
+import PrepareNumberScreen from "../screens/PrepareNumberScreen";
 
 
 export type RootStackPropsList = {
@@ -22,6 +23,7 @@ export type RootStackPropsList = {
     ShowWordList: { wordList: string[], isRandom?: boolean };
     MakeList: undefined
     MakeListsWords: { listId: number, listName: string }
+    PrepareNumber: undefined;
     // Select: undefined;
 };
 
@@ -75,6 +77,11 @@ const AppNavigator = () => {
                     name="MakeListsWords"
                     component={MakeListsWordsScreen}
                     options={{ title: "リストに単語を保存する", headerShown: false }}
+                />
+                <Stack.Screen
+                    name="PrepareNumber"
+                    component={PrepareNumberScreen}
+                    options={{ title: "数字を用意する", headerShown: false }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

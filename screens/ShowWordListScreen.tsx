@@ -123,7 +123,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
                     <Text style={styles.buttonText}>さいしょから</Text>
                 </RectButton>
                 <RectButton style={isOverLine ? { ...styles.button, backgroundColor: '#73fa73' } : { ...styles.button, backgroundColor: '#D3D3D3' }} enabled={isOverLine} onPress={initNextLine}>
-                    <Text style={isOverLine ? styles.buttonText : { ...styles.buttonText, color: 'white' }}>つぎのぎょう</Text>
+                    <Text style={isOverLine ? styles.buttonText : { ...styles.buttonText, color: 'white' }}>つぎ</Text>
                 </RectButton>
             </View>
         </GestureHandlerRootView>

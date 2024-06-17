@@ -80,7 +80,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     const renderLetters = () => {
         return forSelectLetters.split('').map((letter, index) => (
             <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
-                <Text style={gameOver ? styles.smallTitle : { ...styles.selectedLetter, marginTop: 0, marginBottom: 0, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
+                <Text style={gameOver ? styles.smallTitle : { ...styles.selectedLetter, fontSize: 40, marginTop: 0, marginBottom: 0, color: selectedLetters[`${letter}${index}`] ? 'red' : 'black' }}>{letter}</Text>
             </TouchableOpacity>
         ))
     }
