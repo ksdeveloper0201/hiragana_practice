@@ -108,12 +108,40 @@ const MakeListScreen: React.FC<Props> = ({ navigation }) => {
     const [text, setText] = useState<string>("")
     const [items, setItems] = useState<ItemProps[] | null>(null);
 
+    const createGreetingList = () => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "select * from lists where name = ?",
+                ["あいさつ"],
+                (_, { rows }) => {
+                    if (rows.length === 0) {
+                        // 
+                        tx.executeSql(
+                            "insert into lists (name) values (?)",
+                            ["あいさつ"]
+                        );
+                    }
+                },
+                (t, error) => {
+                    console.log("error checking for あいさつ list: ", error);
+                    return false;
+                })
+        }
+        )
+    }
+
 
     useEffect(() => {
         db.transaction((tx) => {
+            // listsテーブルがない場合作成
             tx.executeSql(
-                "create table if not exists lists (listId integer primary key not null, name text);"
+                "create table if not exists lists (listId integer primary key not null, name text);",
+                [],
+                () => {
+                    createGreetingList()
+                }
             );
+
         });
 
         loadItems();

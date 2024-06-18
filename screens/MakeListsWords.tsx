@@ -90,11 +90,41 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
     const [items, setItems] = useState<ItemProps[] | null>(null);
 
 
+    const registerGreetingWords = (id: string) => {
+        db.transaction((tx) => {
+            tx.executeSql("select * from words where listId = ?",
+                [id],
+                (_, { rows }) => {
+                    if (rows.length === 0) {
+                        // 
+                        tx.executeSql("insert into words (listId, word) values (?, ?)", [id, "おはよう"]);
+                        tx.executeSql("insert into words (listId, word) values (?, ?)", [id, "こんにちは"]);
+                        tx.executeSql("insert into words (listId, word) values (?, ?)", [id, "こんばんは"]);
+                        tx.executeSql("insert into words (listId, word) values (?, ?)", [id, "おやすみ"]);
+                        tx.executeSql("insert into words (listId, word) values (?, ?)", [id, "またね"]);
+                    }
+                });
+        });
+    }
+
     useEffect(() => {
         db.transaction((tx) => {
+            // wordsテーブルがない場合作成
             // tx.executeSql("drop table words")
             tx.executeSql(
-                "create table if not exists words (wordId INTEGER PRIMARY KEY AUTOINCREMENT, listId integer, word text);"
+                "create table if not exists words (wordId INTEGER PRIMARY KEY AUTOINCREMENT, listId integer, word text);",
+                [],
+                () => {
+                    let greetingId: string;
+                    tx.executeSql(
+                        "select * from lists where name = ? ",
+                        ["あいさつ"],
+                        (_, { rows: { _array } }) => {
+                            greetingId = _array[0].listId;
+                            registerGreetingWords(greetingId);
+                        }
+                    );
+                }
             );
         });
         loadItems();
@@ -104,7 +134,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
         console.log(`loadItems: ${items}`)
         db.transaction((tx) => {
             tx.executeSql(
-                `select * from words where listId = ? order by wordId desc`,
+                `select * from words where listId = ? order by wordId asc`,
                 [route.params.listId],
                 (_, { rows: { _array } }) => {
                     setItems(_array)
