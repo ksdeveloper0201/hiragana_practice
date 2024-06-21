@@ -5,7 +5,7 @@ import { RootStackPropsList } from "../navigation/AppNavigator";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 
 type ShowWordScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWord'>
@@ -42,7 +42,7 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
     }
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよもう</Text>
             <View style={styles.showWord} >
@@ -56,7 +56,7 @@ const ShowWordScreen: React.FC<ShowWordScreenProps> = ({ route, navigation }) =>
                     <Text style={styles.buttonText}>つぎ</Text>
                 </RectButton>
             </View>
-        </GestureHandlerRootView>
+        </View>
     );
 };
 

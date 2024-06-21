@@ -4,7 +4,9 @@ import { View, Text, Platform, TextInput, FlatList } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
 import * as SQLite from "expo-sqlite/legacy";
-import { RectButton, Swipeable, GestureHandlerRootView } from "react-native-gesture-handler";
+import { RectButton, Swipeable } from "react-native-gesture-handler";
+import * as ScreenOrientation from 'expo-screen-orientation';
+
 
 
 function openDatabase() {
@@ -89,6 +91,13 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
     const [text, setText] = useState<string>("")
     const [items, setItems] = useState<ItemProps[] | null>(null);
 
+    useEffect(() => {
+        ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+
+        return () => {
+            ScreenOrientation.unlockAsync();
+        };
+    }, [])
 
     const registerGreetingWords = (id: string) => {
         db.transaction((tx) => {
@@ -106,6 +115,8 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
                 });
         });
     }
+
+
 
     useEffect(() => {
         db.transaction((tx) => {
@@ -174,7 +185,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
 
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.subtitle}>{route.params.listName}</Text>
             <View style={styles.flexRow}>
@@ -193,7 +204,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
             <RectButton style={styles.button} onPress={() => navigation.navigate("ShowWordList", { wordList: items?.map((item) => item?.word), isRandom: true })}>
                 <Text style={styles.buttonText}>ランダムによもう</Text>
             </RectButton>
-        </GestureHandlerRootView>
+        </View>
     );
 };
 

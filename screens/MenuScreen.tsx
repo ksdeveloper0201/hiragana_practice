@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
-import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const MenuScreen: React.FC<Props> = ({ navigation }) => {
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.title}>ひらがな</Text>
 
@@ -23,7 +23,7 @@ const MenuScreen: React.FC<Props> = ({ navigation }) => {
             <RectButton style={styles.button} onPress={() => navigation.navigate("Puzzle")}>
                 <Text style={styles.buttonText}>あいうえお パズル</Text>
             </RectButton>
-        </GestureHandlerRootView>
+        </View>
     );
 };
 

@@ -4,7 +4,7 @@ import HeaderIcons from "../components/HeaderIcons"
 import { styles } from "../styles/CommonStyles";
 import { HIRAGANA_JAPANESE } from "../enums/words-enum";
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 
 
@@ -107,7 +107,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
     }
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>もじをさがそう</Text>
             <Text style={gameOver ? styles.gameOver : { ...styles.showWord, fontSize: 52 }}>{showingLetters}</Text>
@@ -123,7 +123,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({ navigation }) =
                     <Text style={styles.buttonText}>もういちど</Text>
                 </RectButton>
             </View>
-        </GestureHandlerRootView>);
+        </View>);
 }
 
 export default RandomPuzzleScreen;

@@ -5,7 +5,7 @@ import { styles } from "../styles/CommonStyles";
 import { RouteProp } from "@react-navigation/native";
 import { RootStackPropsList } from "../navigation/AppNavigator";
 import * as ScreenOrientation from 'expo-screen-orientation';
-import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
+import { RectButton } from "react-native-gesture-handler";
 
 
 type ShowWordListScreenRouteProp = RouteProp<RootStackPropsList, 'ShowWordList'>
@@ -112,7 +112,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
     }
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.smallTitle}>こえにだしてよもう</Text>
             <View style={styles.showWord} >
@@ -123,10 +123,10 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({ navigation, rou
                     <Text style={styles.buttonText}>さいしょから</Text>
                 </RectButton>
                 <RectButton style={isOverLine ? { ...styles.button, backgroundColor: '#73fa73' } : { ...styles.button, backgroundColor: '#D3D3D3' }} enabled={isOverLine} onPress={initNextLine}>
-                    <Text style={isOverLine ? styles.buttonText : { ...styles.buttonText, color: 'white' }}>つぎ</Text>
+                    <Text style={isOverLine ? styles.buttonText : { ...styles.buttonText, color: 'white' }}>つぎ               </Text>
                 </RectButton>
             </View>
-        </GestureHandlerRootView>
+        </View>
     );
 }
 

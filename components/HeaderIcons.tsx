@@ -10,7 +10,11 @@ const HeaderIcons: React.FC<Props> = ({ navigation }) => {
 
         <>
             {/* メニューアイコン */}
-            <TouchableOpacity style={styles.menuIcon} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.menuIcon} onPress={() => {
+                if (navigation.canGoBack()) {
+                    navigation.goBack()
+                }
+            }}>
                 <MaterialCommunityIcons name='arrow-left' size={48} color="black" />
             </TouchableOpacity>
 

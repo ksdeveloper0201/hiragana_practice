@@ -1,13 +1,9 @@
 import * as React from "react";
-import { useState, useEffect, useRef } from "react";
-import { View, Text, Platform, TextInput, FlatList, PanResponder, PanResponderGestureState, GestureResponderEvent } from "react-native";
+import { useState } from "react";
+import { View, Text, TextInput, } from "react-native";
 import HeaderIcons from "../components/HeaderIcons";
 import { styles } from "../styles/CommonStyles";
-import * as SQLite from "expo-sqlite/legacy";
-import { GestureHandlerRootView, RectButton, Swipeable } from "react-native-gesture-handler";
-import { render } from "react-dom";
-import * as ScreenOrientation from 'expo-screen-orientation';
-import ShowWordListScreen from "./ShowWordListScreen";
+import { RectButton } from "react-native-gesture-handler";
 import { NUMBER_x } from "../enums/words-enum";
 
 type Props = {
@@ -26,7 +22,7 @@ const PrepareNumberScreen: React.FC<Props> = ({ navigation }) => {
 
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
             <HeaderIcons navigation={navigation} />
             <Text style={styles.subtitle}>いくつまでかぞえる</Text>
             <View style={styles.flexRow} >
@@ -42,7 +38,7 @@ const PrepareNumberScreen: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.buttonText}>かぞえる</Text>
             </RectButton>
 
-        </GestureHandlerRootView>
+        </View>
     );
 };
 
