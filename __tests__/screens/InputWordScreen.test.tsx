@@ -22,7 +22,7 @@ describe('InputWordScreen', () => {
         jest.clearAllMocks();
     });
 
-    it('renders correctly', () => {
+    it('ただしく描画されているか', () => {
         const { getByPlaceholderText, getByText } = render(<InputWordScreen navigation={mockNavigation} />);
 
         expect(getByText('こえにだしてよもう')).toBeTruthy();
@@ -30,7 +30,7 @@ describe('InputWordScreen', () => {
         expect(getByText('けってい')).toBeTruthy();
     });
 
-    it('updates input value correctly', () => {
+    it('Input要素へ値を入力する', () => {
         const { getByPlaceholderText } = render(<InputWordScreen navigation={mockNavigation} />);
 
         const input = getByPlaceholderText('ひらがな');
@@ -39,7 +39,7 @@ describe('InputWordScreen', () => {
         expect(input.props.value).toBe('テスト');
     });
 
-    it('navigates to ShowWord screen with correct input value', () => {
+    it('ShowWord screenに遷移し、値を渡せる', () => {
         const { getByPlaceholderText, getByText } = render(<InputWordScreen navigation={mockNavigation} />);
 
         const input = getByPlaceholderText('ひらがな');

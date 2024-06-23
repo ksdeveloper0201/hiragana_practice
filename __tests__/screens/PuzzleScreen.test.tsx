@@ -1,0 +1,2 @@
+
+const mockProps = jest.fn()

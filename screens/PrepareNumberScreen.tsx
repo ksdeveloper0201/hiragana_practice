@@ -26,7 +26,7 @@ const PrepareNumberScreen: React.FC<Props> = ({ navigation }) => {
             <HeaderIcons navigation={navigation} />
             <Text style={styles.subtitle}>いくつまでかぞえる</Text>
             <View style={styles.flexRow} >
-                <TextInput style={styles.input} value={preparedNumber}
+                <TextInput style={styles.input} value={preparedNumber} placeholder="すうじをいれる"
                     onChangeText={(text) => {
                         if (isNumeric(text) || text === "") {
                             setPreparedNumber(text)

@@ -196,10 +196,6 @@ const MakeListScreen: React.FC<Props> = ({ navigation }) => {
             </View>
             <Items items={items!} navigation={navigation} onPressHandler={() => loadItems()} />
 
-            <RectButton style={styles.button}>
-                <Text style={styles.buttonText}>ぜんぶ けす</Text>
-            </RectButton>
-
         </View>
     );
 };
