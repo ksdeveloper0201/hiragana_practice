@@ -29,17 +29,7 @@ export const styles = StyleSheet.create({
         paddingVertical: 8,
         borderRadius: 20,
     },
-    // moreButton: {
-    //     position: "absolute",
-    //     bottom: 40,
-    //     left: 32,
-    //     backgroundColor: "blue",
-    // },
-    // nextButton: {
-    //     position: "absolute",
-    //     bottom: 40,
-    //     right: 32,
-    // },
+
     buttonText: {
         fontSize: 24,
         paddingHorizontal: 5,
