@@ -4,43 +4,49 @@ import PuzzleScreen from '@/screens/PuzzleScreen';
 import { HIRAGANA_LIST, KANA_LIST } from '@/enums/words-enum';
 
 describe('PuzzleScreen', () => {
-    const mockNavigation = { navigate: jest.fn() };
+  const mockNavigation = { navigate: jest.fn() };
 
-    it('正しく描画されているか', () => {
-        const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
+  it('正しく描画されているか', () => {
+    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
 
-        expect(getByText('あいうえおであそぶ')).toBeTruthy();
-        expect(getByText('あいうえお（ひらがな）')).toBeTruthy();
-        expect(getByText('あいうえお（カタカナ）')).toBeTruthy();
-        expect(getByText('ランダム（ひらがな）')).toBeTruthy();
-        expect(getByText('すうじ')).toBeTruthy();
+    expect(getByText('あいうえおであそぶ')).toBeTruthy();
+    expect(getByText('あいうえお（ひらがな）')).toBeTruthy();
+    expect(getByText('あいうえお（カタカナ）')).toBeTruthy();
+    expect(getByText('ランダム（ひらがな）')).toBeTruthy();
+    expect(getByText('すうじ')).toBeTruthy();
+  });
+
+  it('あいうえお（ひらがな）ボタンを押下', () => {
+    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
+
+    fireEvent.press(getByText('あいうえお（ひらがな）'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
+      wordList: HIRAGANA_LIST,
+      isRandom: false,
     });
+  });
 
-    it('あいうえお（ひらがな）ボタンを押下', () => {
-        const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
+  it('あいうえお（カタカナ）ボタンを押下', () => {
+    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
 
-        fireEvent.press(getByText('あいうえお（ひらがな）'));
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', { wordList: HIRAGANA_LIST, isRandom: false });
+    fireEvent.press(getByText('あいうえお（カタカナ）'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
+      wordList: KANA_LIST,
+      isRandom: false,
     });
+  });
 
-    it('あいうえお（カタカナ）ボタンを押下', () => {
-        const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
+  it('ランダム（ひらがな）ボタンを押下', () => {
+    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
 
-        fireEvent.press(getByText('あいうえお（カタカナ）'));
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', { wordList: KANA_LIST, isRandom: false });
-    });
+    fireEvent.press(getByText('ランダム（ひらがな）'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('RandomPuzzle');
+  });
 
-    it('ランダム（ひらがな）ボタンを押下', () => {
-        const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
+  it('すうじボタンを押下', () => {
+    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
 
-        fireEvent.press(getByText('ランダム（ひらがな）'));
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('RandomPuzzle');
-    });
-
-    it('すうじボタンを押下', () => {
-        const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
-
-        fireEvent.press(getByText('すうじ'));
-        expect(mockNavigation.navigate).toHaveBeenCalledWith('PrepareNumber');
-    });
+    fireEvent.press(getByText('すうじ'));
+    expect(mockNavigation.navigate).toHaveBeenCalledWith('PrepareNumber');
+  });
 });
