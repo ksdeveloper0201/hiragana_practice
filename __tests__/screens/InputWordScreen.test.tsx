@@ -51,7 +51,7 @@ describe('InputWordScreen', () => {
         expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWord', { inputValue: 'テスト' });
     });
 
-    it('navigates to ShowWord screen with default value if input is empty', () => {
+    it('値が空の場合でもShowWord screenに遷移し、値を渡せる', () => {
         const { getByText } = render(<InputWordScreen navigation={mockNavigation} />);
 
         const button = getByText('けってい');
