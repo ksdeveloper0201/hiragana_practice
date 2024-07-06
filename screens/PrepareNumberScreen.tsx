@@ -41,7 +41,7 @@ const PrepareNumberScreen: React.FC<Props> = ({ navigation }) => {
         onPress={() =>
           navigation.navigate('ShowWordList', {
             wordList: NUMBER_x(parseInt(preparedNumber)),
-            listCategory: 'order',
+            listCategory: 'numbers',
           })
         }
       >
