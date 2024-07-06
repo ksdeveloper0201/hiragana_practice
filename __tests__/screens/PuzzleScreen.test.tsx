@@ -23,7 +23,6 @@ describe('PuzzleScreen', () => {
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
       wordList: HIRAGANA_LIST,
       listCategory: 'order',
-
     });
   });
 
@@ -34,7 +33,6 @@ describe('PuzzleScreen', () => {
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
       wordList: KANA_LIST,
       listCategory: 'order',
-
     });
   });
 

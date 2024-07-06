@@ -19,7 +19,6 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
           navigation.navigate('ShowWordList', {
             wordList: HIRAGANA_LIST,
             listCategory: 'order',
-
           })
         }
       >
@@ -31,7 +30,6 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
           navigation.navigate('ShowWordList', {
             wordList: KANA_LIST,
             listCategory: 'order',
-
           })
         }
       >

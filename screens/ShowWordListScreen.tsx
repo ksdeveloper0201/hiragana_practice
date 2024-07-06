@@ -129,7 +129,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({
     if (
       isOverLine &&
       selectedLetters[
-      `${showingWords[showingWords.length - 1]}${showingWords.length - 1}`
+        `${showingWords[showingWords.length - 1]}${showingWords.length - 1}`
       ] === true
     ) {
       setLineIndex((prevNum) => {

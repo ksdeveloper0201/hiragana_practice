@@ -12,7 +12,7 @@ function openDatabase() {
     return {
       transaction: () => {
         return {
-          executeSql: () => { },
+          executeSql: () => {},
         };
       },
     };

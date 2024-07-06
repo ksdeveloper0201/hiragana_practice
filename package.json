@@ -12,7 +12,7 @@
     "testDebug": "jest -o --watch --coverage=false",
     "testFinal": "jest",
     "updateSnapshots": "jest -u --coverage=false",
-    "format": "prettier --write .",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx}'",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "jest": {
