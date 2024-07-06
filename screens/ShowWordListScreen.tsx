@@ -36,7 +36,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
     // シャッフルされたリストを設定
-    if (route.params.isRandom) {
+    if (route.params.listCategory === 'random') {
       const shuffledList = shuffleArray(route.params.wordList);
       setWordList(shuffledList);
     } else {
@@ -129,7 +129,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({
     if (
       isOverLine &&
       selectedLetters[
-        `${showingWords[showingWords.length - 1]}${showingWords.length - 1}`
+      `${showingWords[showingWords.length - 1]}${showingWords.length - 1}`
       ] === true
     ) {
       setLineIndex((prevNum) => {
@@ -147,7 +147,7 @@ const ShowWordListScreen: React.FC<ShowWordListScreenProps> = ({
     setIsOverLine(false);
     setShowingWords('');
     setLineIndex(0);
-    if (route.params.isRandom) {
+    if (route.params.listCategory === 'random') {
       const shuffledList = shuffleArray(route.params.wordList);
       setWordList(shuffledList);
     } else {

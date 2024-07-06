@@ -15,7 +15,8 @@ const mockRoute = {
   name: 'ShowWordList' as 'ShowWordList',
   params: {
     wordList: ['あいう', 'かきく'],
-    isRandom: false,
+    listCategory: 'order',
+
   },
 } as RouteProp<RootStackPropsList, 'ShowWordList'>;
 

@@ -22,7 +22,8 @@ describe('PuzzleScreen', () => {
     fireEvent.press(getByText('あいうえお（ひらがな）'));
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
       wordList: HIRAGANA_LIST,
-      isRandom: false,
+      listCategory: 'order',
+
     });
   });
 
@@ -32,7 +33,8 @@ describe('PuzzleScreen', () => {
     fireEvent.press(getByText('あいうえお（カタカナ）'));
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
       wordList: KANA_LIST,
-      isRandom: false,
+      listCategory: 'order',
+
     });
   });
 

@@ -12,7 +12,7 @@ function openDatabase() {
     return {
       transaction: () => {
         return {
-          executeSql: () => {},
+          executeSql: () => { },
         };
       },
     };
@@ -224,7 +224,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
         onPress={() =>
           navigation.navigate('ShowWordList', {
             wordList: items?.map((item) => item?.word),
-            isRandom: false,
+            listCategory: 'order',
           })
         }
       >
@@ -235,7 +235,7 @@ const MakeListsWordsScreen: React.FC<Props> = ({ navigation, route }) => {
         onPress={() =>
           navigation.navigate('ShowWordList', {
             wordList: items?.map((item) => item?.word),
-            isRandom: true,
+            listCategory: 'random',
           })
         }
       >

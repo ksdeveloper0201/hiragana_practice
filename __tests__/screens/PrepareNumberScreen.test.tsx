@@ -48,7 +48,7 @@ describe('PrepareNumberScreen', () => {
 
     expect(mockNavigation.navigate).toHaveBeenCalledWith('ShowWordList', {
       wordList: expect.any(Array), // NUMBER_xの結果が配列であることを確認
-      isRandom: false,
+      listCategory: 'order',
     });
   });
 });
