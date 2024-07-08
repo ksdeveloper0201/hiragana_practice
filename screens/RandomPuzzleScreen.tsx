@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import HeaderIcons from '../components/HeaderIcons';
-import { styles } from '../styles/CommonStyles';
-import { HIRAGANA_JAPANESE } from '../enums/words-enum';
+import HeaderIcons from '@/components/HeaderIcons';
+import { styles } from '@/styles/CommonStyles';
+import { HIRAGANA_JAPANESE } from '@/enums/words-enum';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { RectButton } from 'react-native-gesture-handler';
-
-const randomHiraganas = Array.from(Array(10))
-  .map(
-    () =>
-      HIRAGANA_JAPANESE[Math.floor(Math.random() * HIRAGANA_JAPANESE.length)]
-  )
-  .join('');
 
 interface RandomPuzzleScreenProps {
   navigation: any;
@@ -20,93 +13,66 @@ interface RandomPuzzleScreenProps {
 const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({
   navigation,
 }) => {
-  const [selectedLetters, setSelectedLetters] = useState<{
-    [key: string]: boolean;
-  }>({});
-  const [forSelectLetters, setForSelectedLetters] = useState<string>('');
-
-  const [srcLetters, setSrcLetters] = useState<string>('');
+  const [selectedLetters, setSelectedLetters] = useState<{ [key: string]: boolean }>({});
+  const [forSelectLetters, setForSelectLetters] = useState<string>('');
+  const [shuffledLetters, setShuffledLetters] = useState<string[]>([]);
   const [showingLetters, setShowingLetters] = useState<string>('');
-  const [gameOver, setGameOver] = useState<boolean>();
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
   useEffect(() => {
-    const HIRAGANA =
-      'あいうえおかきくけこさしすせそたちつてとなにぬねのまみむめもやゆよらりるれろわをん';
-    const DAKUTEN = 'ざじずぜぞだぢづでどはびぶべぼ';
-    const HANDAKUTEN = 'ぱぴぷぺぽ';
-    const JAPANESE = HIRAGANA + DAKUTEN + HANDAKUTEN;
     const randomHiraganas = generateUniqueRandomHiraganas(10);
-
-    setSrcLetters(randomHiraganas);
-    setForSelectedLetters(randomHiraganas);
+    setForSelectLetters(randomHiraganas);
+    setShuffledLetters(shuffleHiraganas(randomHiraganas.split('')));
   }, []);
 
   useEffect(() => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-
     return () => {
       ScreenOrientation.unlockAsync();
     };
   }, []);
 
   useEffect(() => {
-    if (srcLetters) {
-      const newShowingLetter =
-        srcLetters[Math.floor(Math.random() * srcLetters.length)];
+    if (shuffledLetters.length > 0) {
+      const newShowingLetter = shuffledLetters[0];
       setShowingLetters(newShowingLetter);
-      console.log('New showingLetters:', newShowingLetter);
     }
-  }, [srcLetters]);
-
-  const shuffleHiraganas = randomHiraganas
-    .split('')
-    .sort(() => Math.random() - 0.5)
-    .join('');
+  }, [shuffledLetters]);
 
   const handleLetterPress = (letter: string, index: number) => {
-    console.log('handleletter');
-    if (letter == showingLetters) {
-      console.log('onaji');
+    if (letter === showingLetters) {
       setSelectedLetters((prevState) => ({
         ...prevState,
         [`${letter}${index}`]: true,
       }));
 
-      const updatedSrcLetters = srcLetters.replace(showingLetters, '');
-      setSrcLetters(updatedSrcLetters);
-      console.log('updatedSrc', srcLetters);
+      const updatedShuffledLetters = shuffledLetters.slice(1);
+      setShuffledLetters(updatedShuffledLetters);
 
-      if (updatedSrcLetters.length === 0) {
-        console.log('All letters selected!');
+      if (updatedShuffledLetters.length === 0) {
         setGameOver(true);
         setShowingLetters('よくできました');
       } else {
-        const randomIndex = Math.floor(Math.random() * srcLetters.length);
-        const newShowingLetter = updatedSrcLetters[randomIndex];
+        const newShowingLetter = updatedShuffledLetters[0];
         setShowingLetters(newShowingLetter);
-        console.log('showingLetters', newShowingLetter);
       }
     }
-    console.log('updatedSrc', srcLetters);
   };
 
   const renderLetters = () => {
     return forSelectLetters.split('').map((letter, index) => (
-      <TouchableOpacity
-        key={index}
-        onPress={() => handleLetterPress(letter, index)}
-      >
+      <TouchableOpacity key={index} onPress={() => handleLetterPress(letter, index)}>
         <Text
           style={
             gameOver
               ? styles.smallTitle
               : {
-                  ...styles.selectedLetter,
-                  fontSize: 40,
-                  marginTop: 0,
-                  marginBottom: 0,
-                  color: selectedLetters[`${letter}${index}`] ? 'red' : 'black',
-                }
+                ...styles.selectedLetter,
+                fontSize: 40,
+                marginTop: 0,
+                marginBottom: 0,
+                color: selectedLetters[`${letter}${index}`] ? 'red' : 'black',
+              }
           }
         >
           {letter}
@@ -117,23 +83,22 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({
 
   function generateUniqueRandomHiraganas(count: number): string {
     const uniqueChars: Set<string> = new Set<string>();
-
     while (uniqueChars.size < count) {
       const randomIndex = Math.floor(Math.random() * HIRAGANA_JAPANESE.length);
       uniqueChars.add(HIRAGANA_JAPANESE[randomIndex]);
     }
-
     return Array.from(uniqueChars).join('');
+  }
+
+  function shuffleHiraganas(array: string[]): string[] {
+    return array.sort(() => Math.random() - 0.5);
   }
 
   const resetGame = () => {
     const newRandomHiraganas = generateUniqueRandomHiraganas(10);
-    setSrcLetters(newRandomHiraganas);
-    setForSelectedLetters(newRandomHiraganas);
+    setForSelectLetters(newRandomHiraganas);
+    setShuffledLetters(shuffleHiraganas(newRandomHiraganas.split('')));
     setSelectedLetters({});
-    setShowingLetters(
-      newRandomHiraganas[Math.floor(Math.random() * newRandomHiraganas.length)]
-    );
     setGameOver(false);
   };
 
@@ -141,11 +106,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({
     <View style={styles.container}>
       <HeaderIcons navigation={navigation} />
       <Text style={styles.smallTitle}>もじをさがそう</Text>
-      <Text
-        style={
-          gameOver ? styles.gameOver : { ...styles.showWord, fontSize: 52 }
-        }
-      >
+      <Text style={gameOver ? styles.gameOver : { ...styles.showWord, fontSize: 52 }}>
         {showingLetters}
       </Text>
       {!gameOver && (
@@ -154,10 +115,7 @@ const RandomPuzzleScreen: React.FC<RandomPuzzleScreenProps> = ({
         </View>
       )}
       <View style={{ flexDirection: 'row' }}>
-        <RectButton
-          style={{ ...styles.button, backgroundColor: '#58aef5' }}
-          onPress={resetGame}
-        >
+        <RectButton style={{ ...styles.button, backgroundColor: '#58aef5' }} onPress={resetGame}>
           <Text style={styles.buttonText}>もういちど</Text>
         </RectButton>
       </View>
