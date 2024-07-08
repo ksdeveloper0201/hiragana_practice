@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
   gameOver: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: 'blue',
+    color: 'red',
     marginVertical: 20,
   },
   flexRow: {
