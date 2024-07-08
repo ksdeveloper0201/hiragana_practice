@@ -22,7 +22,7 @@ const PrepareNumberScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <HeaderIcons navigation={navigation} />
-      <Text style={styles.subtitle}>いくつまでかぞえる</Text>
+      <Text style={styles.subtitle}>いくつまでかぞえる？</Text>
       <View style={styles.flexRow}>
         <TextInput
           style={styles.input}

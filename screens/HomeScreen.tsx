@@ -25,7 +25,13 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate('Puzzle')}
       >
-        <Text style={styles.buttonText}>あいうえおであそぶ</Text>
+        <Text style={styles.buttonText}>ひらがなであそぶ</Text>
+      </RectButton>
+      <RectButton
+        style={styles.button}
+        onPress={() => navigation.navigate('PrepareNumber')}
+      >
+        <Text style={styles.buttonText}>すうじであそぶ</Text>
       </RectButton>
 
       <RectButton

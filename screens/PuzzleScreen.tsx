@@ -12,7 +12,7 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <HeaderIcons navigation={navigation} />
-      <Text style={{ ...styles.title, fontSize: 36 }}>あいうえおであそぶ</Text>
+      <Text style={{ ...styles.title, fontSize: 36 }}>ひらがなであそぶ</Text>
       <RectButton
         style={styles.button}
         onPress={() =>
@@ -40,12 +40,6 @@ const PuzzleScreen: React.FC<Props> = ({ navigation }) => {
         onPress={() => navigation.navigate('RandomPuzzle')}
       >
         <Text style={styles.buttonText}>ランダム（ひらがな）</Text>
-      </RectButton>
-      <RectButton
-        style={styles.button}
-        onPress={() => navigation.navigate('PrepareNumber')}
-      >
-        <Text style={styles.buttonText}>すうじ</Text>
       </RectButton>
     </View>
   );

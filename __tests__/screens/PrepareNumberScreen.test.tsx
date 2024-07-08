@@ -16,7 +16,7 @@ describe('PrepareNumberScreen', () => {
     const { getByText, getByPlaceholderText } = render(
       <PrepareNumberScreen navigation={mockNavigation} />
     );
-    expect(getByText('いくつまでかぞえる')).toBeTruthy();
+    expect(getByText('いくつまでかぞえる？')).toBeTruthy();
     expect(getByPlaceholderText('すうじをいれる')).toBeTruthy();
   });
 

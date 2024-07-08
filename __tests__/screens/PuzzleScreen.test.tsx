@@ -9,11 +9,10 @@ describe('PuzzleScreen', () => {
   it('正しく描画されているか', () => {
     const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
 
-    expect(getByText('あいうえおであそぶ')).toBeTruthy();
+    expect(getByText('ひらがなであそぶ')).toBeTruthy();
     expect(getByText('あいうえお（ひらがな）')).toBeTruthy();
     expect(getByText('あいうえお（カタカナ）')).toBeTruthy();
     expect(getByText('ランダム（ひらがな）')).toBeTruthy();
-    expect(getByText('すうじ')).toBeTruthy();
   });
 
   it('あいうえお（ひらがな）ボタンを押下', () => {
@@ -41,12 +40,5 @@ describe('PuzzleScreen', () => {
 
     fireEvent.press(getByText('ランダム（ひらがな）'));
     expect(mockNavigation.navigate).toHaveBeenCalledWith('RandomPuzzle');
-  });
-
-  it('すうじボタンを押下', () => {
-    const { getByText } = render(<PuzzleScreen navigation={mockNavigation} />);
-
-    fireEvent.press(getByText('すうじ'));
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('PrepareNumber');
   });
 });
